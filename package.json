@@ -1,5 +1,13 @@
 {
   "name": "dist-admin",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "^3.2.2",
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "selectize": "^0.12.4"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.1"
+  }
 }

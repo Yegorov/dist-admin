@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Gems that use the application
+gem 'webpacker', '~> 3.2'
 gem 'slim-rails', '~> 3.1.2'
 
 
