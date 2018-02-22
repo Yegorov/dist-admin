@@ -7,14 +7,20 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import Rails from 'rails-ujs';
+import Turbolinks from 'turbolinks';
+
 import "./application.css";
 import 'bootstrap/dist/css/bootstrap'
 import 'selectize/dist/css/selectize'
 
 import * as $ from 'jquery'
 import 'selectize'
+//import 'popper'
+import 'bootstrap'
 
-$(function() {
+
+$(document).on('turbolinks:load', function() {
   $('#input-tags').selectize({
       delimiter: ',',
       persist: false,
@@ -27,4 +33,5 @@ $(function() {
   });
 });
 
-console.log('Hello World from Webpacker')
+Rails.start();
+Turbolinks.start();
