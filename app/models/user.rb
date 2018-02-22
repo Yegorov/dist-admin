@@ -47,7 +47,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
+  validates :name, :login, :email, presence: true
+  validates :login, :email, uniqueness: true
+  validates :login, length: { minimum: 5, maximum: 50 },
+                    format: { with: /\A[a-z][a-z0-9]+\z/ }
+
   def active_for_authentication?
-    super && !self.deleted
+    super && !self.deleted?
+  end
+
+  def admin?
+    self.role == ADMIN
+  end
+
+  def soft_delete
+    self.deleted = true
+    save
   end
 end

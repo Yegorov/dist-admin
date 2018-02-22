@@ -16,7 +16,8 @@ $ cd dist-admin
 $ rvm use 2.4.1 # swith to correct ruby version
 $ bundle install
 $ yarn install
-$ bin/rails db:drop db:create db:migrate db:seed # Init DB
+$ bin/rails db:create db:migrate 
+$ bin/rails db:seed ADMIN_PASSWORD=YOU_SECRET_PASS ADMIN_EMAIL=youemail@example.com # Init DB
 $ bin/rails s
 # Go to browser and open http://localhost:3000
 ```
@@ -49,3 +50,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+bin/rails db:drop db:create db:migrate db:seed
