@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     #omniauth_callbacks: 'users/omniauth_callbacks'
   }
   root to: 'home#index'
+  get '/about', to: "home#about", as: :about
   get '/u/:id', to: "profile#index", as: :profile
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

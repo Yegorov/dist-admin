@@ -1,26 +1,30 @@
-<h2>Log in</h2>
+<div class="text-center">
+  <%= form_for(resource, as: resource_name,
+               url: session_path(resource_name),
+               html: { class: "form-signin" }) do |f| %>
+    <img class="mb-4" src="/android-icon-72x72.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= f.label :email, class: "sr-only" %>
+    <%= f.email_field :email, autofocus: true,
+                              required: true,
+                              autocomplete: "email",
+                              placeholder: "Email address",
+                              class: "form-control" %>
+    <%= f.label :password, class: "sr-only" %>
+    <%= f.password_field :password, autocomplete: "off",
+                                    required: true,
+                                    placeholder: "Password",
+                                    class: "form-control" %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
+    <div class="checkbox mb-3">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block" %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-success btn-block", role: "button" %>
+  <% end %>
+</div>
 
-<%= render "users/shared/links" %>
+<%#= render "users/shared/links" %>
