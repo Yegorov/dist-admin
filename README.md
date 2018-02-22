@@ -16,6 +16,7 @@ $ cd dist-admin
 $ rvm use 2.4.1 # swith to correct ruby version
 $ bundle install
 $ yarn install
+$ bin/rails db:drop db:create db:migrate db:seed # Init DB
 $ bin/rails s
 # Go to browser and open http://localhost:3000
 ```

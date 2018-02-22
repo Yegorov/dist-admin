@@ -9,9 +9,14 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    user = User.find_by(email: params.dig(:user, :email))
+    if user.banned
+      redirect_to root_path, alert: "Sorry, but are you banned!"
+    else
+      super
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy
