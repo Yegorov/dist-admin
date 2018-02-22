@@ -57,5 +57,7 @@ Rails.application.configure do
 
   config.active_record.schema_format = :sql # :ruby
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   Slim::Engine.set_options pretty: true
 end

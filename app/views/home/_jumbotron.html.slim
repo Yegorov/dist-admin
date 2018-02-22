@@ -5,4 +5,5 @@ div class="container"
     hr class="my-4"
     p If you are not yet with us, register now
     p class="lead"
-      a class="btn btn-primary btn-lg" href="#" role="button" Sign up
+      /a class="btn btn-primary btn-lg" href="#" role="button" Sign up
+      = link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg", role: "button"

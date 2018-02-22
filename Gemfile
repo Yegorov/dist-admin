@@ -38,6 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # Gems that use the application
 gem 'webpacker', '~> 3.2'
 gem 'slim-rails', '~> 3.1.2'
+gem 'devise', '~> 4.4.1'
 
 
 group :development, :test do
