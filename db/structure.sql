@@ -9,9 +9,21 @@ CREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token");
 CREATE TABLE "documents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "iid" integer NOT NULL, "parent_iid" integer DEFAULT NULL, "owner_id" integer, "creator_id" integer, "type" varchar NOT NULL, "name" varchar NOT NULL, "real_path" varchar NOT NULL, "size" integer DEFAULT 0, "hash_sum" varchar DEFAULT '', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_documents_on_owner_id" ON "documents" ("owner_id");
 CREATE INDEX "index_documents_on_creator_id" ON "documents" ("creator_id");
+CREATE TABLE "document_permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "document_id" integer, "action" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_219008edb6"
+FOREIGN KEY ("document_id")
+  REFERENCES "documents" ("id")
+);
+CREATE INDEX "index_document_permissions_on_user_id" ON "document_permissions" ("user_id");
+CREATE INDEX "index_document_permissions_on_document_id" ON "document_permissions" ("document_id");
+CREATE UNIQUE INDEX "index_document_permissions_on_user_id_and_document_id" ON "document_permissions" ("user_id", "document_id");
+CREATE TABLE "document_action_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "document_id" integer, "action" integer, "message" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE INDEX "index_document_action_logs_on_user_id" ON "document_action_logs" ("user_id");
+CREATE INDEX "index_document_action_logs_on_document_id" ON "document_action_logs" ("document_id");
 INSERT INTO "schema_migrations" (version) VALUES
 ('20180222113745'),
 ('20180222114505'),
-('20180223071308');
+('20180223071308'),
+('20180223093950'),
+('20180223094239');
 
 
