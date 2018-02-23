@@ -25,8 +25,8 @@ module FileEntity
   class Folder < Document
     # Directory
 
-    def self.mk_dir(name:, real_path:, user:, parent: nil)
-      self.mk_document
+    def self.mk_dir(**kwargs) #(name:, real_path:, user:, parent: nil)
+      self.mk_document(kwargs)
     end
   end
 end

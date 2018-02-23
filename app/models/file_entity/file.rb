@@ -25,8 +25,8 @@ module FileEntity
   class File < Document
     # Regular File
 
-    def self.mk_file(name:, real_path:, user:, parent: nil)
-      self.mk_document
+    def self.mk_file(**kwargs) #(name:, real_path:, user:, parent: nil)
+      self.mk_document(kwargs)
     end
   end
 end

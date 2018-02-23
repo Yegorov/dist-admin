@@ -11,9 +11,9 @@
 #
 # Indexes
 #
-#  index_document_permissions_on_document_id              (document_id)
-#  index_document_permissions_on_user_id                  (user_id)
-#  index_document_permissions_on_user_id_and_document_id  (user_id,document_id) UNIQUE
+#  idx_user_document_action                   (user_id,document_id,action) UNIQUE
+#  index_document_permissions_on_document_id  (document_id)
+#  index_document_permissions_on_user_id      (user_id)
 #
 
 require 'rails_helper'
