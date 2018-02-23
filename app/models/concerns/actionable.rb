@@ -17,6 +17,19 @@ module Actionable
                               .take_while { |klass| klass != Action }
                               .map(&:id)) }
     end
+
+    scope :action, ->(a) do
+      if a.kind_of?(Action)
+        send("kind_of_#{a.class.model_name.element}")
+      elsif a.kind_of?(Integer)
+        if @@actions.fetch(a, nil).nil?
+          raise "Unknown action with id=#{a}"
+        end
+        send("kind_of_#{@@actions[a].class.model_name.element}")
+      else
+        send("kind_of_#{a.model_name.element}")
+      end
+    end
   end
 
   def action
@@ -30,6 +43,25 @@ module Actionable
       self[:action] = a.id
     elsif a.is_a?(Integer)
       self[:action] = a
+    end
+  end
+
+  Action.descendants.each do |action_class|
+    define_method :"allow_#{action_class.model_name.element}?" do
+      self.action == action_class || self.action.class.descendants.include?(action_class)
+    end
+  end
+
+  define_method :"allow?" do |a|
+    if a.kind_of?(Action)
+      send("allow_#{a.class.model_name.element}?")
+    elsif a.kind_of?(Integer)
+      if @@actions.fetch(a, nil).nil?
+        raise "Unknown action with id=#{a}"
+      end
+      send("allow_#{@@actions[a].class.model_name.element}?")
+    else
+      send("allow_#{a.model_name.element}?")
     end
   end
 
