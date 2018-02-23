@@ -19,11 +19,16 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
       li class="nav-item #{active?(about_path)}"
         a class="nav-link" href="#{about_path}"
           | About
+      li class="nav-item #{active?(help_path)}"
+        a class="nav-link" href="#{help_path}"
+          | Help
       - if current_user.present?
         li class="nav-item #{active?(profile_path(current_user))}"
           a class="nav-link" href="#{profile_path(current_user)}" Profile
+        li class="nav-item #{active?(tasks_path(login: current_user.login))}"
+          a class="nav-link" href="#{tasks_path(login: current_user.login)}" Tasks
         li class="nav-item"
-          a class="nav-link disabled" href="#" Disabled
+          a class="nav-link disabled" href="#" Activity
         li class="nav-item dropdown"
           a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Dropdown
           div class="dropdown-menu" aria-labelledby="dropdown01"

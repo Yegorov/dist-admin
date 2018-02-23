@@ -2,7 +2,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
   def change
     create_table :tasks do |t|
       t.string :name, null: false, default: ""
-      t.integer :state, null: false
+      t.integer :state, null: false, default: 0
       t.references :creator
       t.datetime :started_at
       t.datetime :stopped_at

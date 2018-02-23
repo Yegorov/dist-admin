@@ -14,5 +14,21 @@ Rails.application.routes.draw do
   get ':login', to: "profile#show", as: :profile
   get ':login/settings', to: "profile#edit", as: :profile_settings
 
+  scope ':login' do
+    resources :documents do
+      resources :logs, only: [:index, :show], controller: 'document/logs'
+    end
+
+    scope 'documents' do
+      resources :permissions, controller: 'document/permissions'
+    end
+
+    resources :tasks do
+      resources :logs, only: [:index, :show], controller: 'task/logs'
+    end
+
+    resources :scripts
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

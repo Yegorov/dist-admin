@@ -15,5 +15,6 @@
 #
 
 class TaskLog < ApplicationRecord
+  include TaskState
   belongs_to :task
 end

@@ -64,4 +64,8 @@ class User < ApplicationRecord
     self.deleted = true
     save
   end
+
+  def to_param
+    self.login
+  end
 end
