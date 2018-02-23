@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   }
   root to: 'home#index'
   get '/about', to: "home#about", as: :about
-  get '/u/:id', to: "profile#index", as: :profile
+
+  get ':login', to: "profile#show", as: :profile
+  get ':login/settings', to: "profile#edit", as: :profile_settings
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
