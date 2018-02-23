@@ -6,7 +6,7 @@ CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email");
 CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token");
 CREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token");
 CREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token");
-CREATE TABLE "documents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "iid" integer NOT NULL, "parent_iid" integer DEFAULT NULL, "owner_id" integer, "creator_id" integer, "type" varchar NOT NULL, "name" varchar NOT NULL, "real_path" varchar NOT NULL, "size" integer DEFAULT 0, "hash_sum" varchar DEFAULT '', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE TABLE "documents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "iid" integer NOT NULL, "parent_iid" integer DEFAULT NULL, "owner_id" integer, "creator_id" integer, "type" varchar NOT NULL, "name" varchar NOT NULL, "real_path" varchar NOT NULL, "size" integer DEFAULT 0, "prepared" boolean DEFAULT 'f', "deleted" boolean DEFAULT 'f', "hash_sum" varchar DEFAULT '', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_documents_on_owner_id" ON "documents" ("owner_id");
 CREATE INDEX "index_documents_on_creator_id" ON "documents" ("creator_id");
 CREATE TABLE "document_permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "document_id" integer, "action" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);

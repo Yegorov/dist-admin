@@ -9,6 +9,8 @@ class CreateDocuments < ActiveRecord::Migration[5.1]
       t.string :name, null: false
       t.string :real_path, null: false
       t.integer :size, nil: false, default: 0
+      t.boolean :prepared, nil: false, default: false
+      t.boolean :deleted, nil: false, default: false
       t.string :hash_sum, nil: false, default: ""
 
       t.timestamps

@@ -11,6 +11,8 @@
 #  name       :string           not null
 #  real_path  :string           not null
 #  size       :integer          default(0)
+#  prepared   :boolean          default(FALSE)
+#  deleted    :boolean          default(FALSE)
 #  hash_sum   :string           default("")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
