@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string           default(""), not null
-#  state       :integer          not null
-#  creator_id  :integer
+#  state       :integer          default("created"), not null
+#  owner_id    :integer
 #  started_at  :datetime
 #  stopped_at  :datetime
 #  finished_at :datetime
@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_tasks_on_creator_id  (creator_id)
+#  index_tasks_on_owner_id  (owner_id)
 #
 
 require 'rails_helper'

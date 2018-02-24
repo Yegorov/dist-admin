@@ -3,7 +3,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
     create_table :tasks do |t|
       t.string :name, null: false, default: ""
       t.integer :state, null: false, default: 0
-      t.references :creator
+      t.references :owner
       t.datetime :started_at
       t.datetime :stopped_at
       t.datetime :finished_at
@@ -11,6 +11,6 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_foreign_key :tasks, :users, column: :creator_id
+    add_foreign_key :tasks, :users, column: :owner_id
   end
 end

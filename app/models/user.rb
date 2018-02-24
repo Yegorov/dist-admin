@@ -48,7 +48,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable
 
   has_many :documents, foreign_key: "owner_id", dependent: :delete_all
-  has_many :tasks, foreign_key: "creator_id", dependent: :delete_all
+  has_many :tasks, foreign_key: "owner_id", dependent: :delete_all
   has_many :scripts, foreign_key: "owner_id", dependent: :delete_all
 
   validates :name, :login, :email, presence: true

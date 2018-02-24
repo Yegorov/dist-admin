@@ -10,7 +10,7 @@
 #  reducer    :text             default(""), not null
 #  input      :text             default(""), not null
 #  output     :text             default(""), not null
-#  language   :integer          default(1), not null
+#  language   :integer          default("python"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
