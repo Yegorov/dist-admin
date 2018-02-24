@@ -29,6 +29,8 @@ class Document < ApplicationRecord
   has_many :logs, class_name: "DocumentActionLog"
   has_many :permissions, class_name: "DocumentPermission"
 
+  scope :roots, ->() { where(parent_iid: nil)}
+
   def folder?
     self.type == FileEntity::Folder.to_s
   end
@@ -53,21 +55,19 @@ class Document < ApplicationRecord
     end
 
     parent_iid = nil
-    if parent.present?
-      if parent.type == "Folder"
-        parent_iid = parent.try(:iid)
-      end
+    if parent.present? and parent.folder?
+      parent_iid = parent.try(:iid)
     end
 
     user.with_lock do
       user.increment(:document_sequence)
+      user.save
       self.create(name: name, 
                   real_path: real_path,
                   iid: user.document_sequence,
                   owner: user,
                   creator: user,
                   parent_iid: parent_iid)
-      user.save
     end
   end
 end

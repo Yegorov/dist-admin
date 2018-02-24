@@ -17,3 +17,39 @@ guest.confirm
 deleted = User.create!(name: "Deleted", login: "deleted", email: "deleted@example.com",
                        password: "deleted_user_pass", banned: true)
 deleted.confirm
+
+## Fake data (needs remove in production)
+
+user1 = User.create!(name: "User 1", login: "user1", email: "user1@example.com",
+                     password: "1234567")
+user1.confirm
+
+# Create Files and Folders
+# need FileManager
+f = FileEntity::File.mk_file(name: "My file",
+                             real_path: "hdfs://dir1/node25/file",
+                             user: admin)
+f1 = FileEntity::File.mk_file(name: "My file 1",
+                              real_path: "hdfs://dir1/node25/file1",
+                              user: admin)
+f2 = FileEntity::File.mk_file(name: "My file 2",
+                              real_path: "hdfs://dir1/node25/file2",
+                              user: admin)
+d = FileEntity::Folder.mk_dir(name: "My folder test",
+                              real_path: "hdfs://dir1/node25/folder",
+                              user: admin)
+f3 = FileEntity::File.mk_file(name: "My file 2",
+                              real_path: "hdfs://dir1/node25/file3",
+                              user: admin,
+                              parent: d)
+
+# need PermitManager
+DocumentPermission.create!(document: f, user: user1, action: Action::Read)
+DocumentPermission.create!(document: f, user: user1, action: Action::Update)
+DocumentPermission.create!(document: f1, user: user1, action: Action::Write)
+
+# need TaskManager
+admin.tasks.create!(name: "My Task 1")
+
+admin.scripts.create!(name: "Map reduce world splitter")
+
