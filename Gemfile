@@ -39,6 +39,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'webpacker', '~> 3.2'
 gem 'slim-rails', '~> 3.1.2'
 gem 'devise', '~> 4.4.1'
+gem 'kaminari', '~> 1.1.1'
 
 
 group :development, :test do

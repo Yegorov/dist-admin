@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   scope ':login' do
     resources :documents do
+      get 'page/:page', action: :index, on: :collection # for kaminari
       resources :permissions, shallow: true
       resources :logs, only: [:index, :show], controller: 'document/logs'
     end
