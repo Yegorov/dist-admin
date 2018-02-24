@@ -24,8 +24,8 @@
 #
 
 class Document < ApplicationRecord
-  belongs_to :owner, class_name: "User", foreign_key: "owner_id"
-  belongs_to :creator, class_name: "User", foreign_key: "creator_id"
+  belongs_to :owner, class_name: "User"
+  belongs_to :creator, class_name: "User"
 
   def folder?
     self.type == FileEntity::Folder.to_s
