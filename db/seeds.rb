@@ -29,19 +29,33 @@ user1.confirm
 f = FileEntity::File.mk_file(name: "My file",
                              real_path: "hdfs://dir1/node25/file",
                              user: admin)
+f.prepared = true
+f.save
+
 f1 = FileEntity::File.mk_file(name: "My file 1",
                               real_path: "hdfs://dir1/node25/file1",
                               user: admin)
+f1.prepared = true
+f1.save
+
 f2 = FileEntity::File.mk_file(name: "My file 2",
                               real_path: "hdfs://dir1/node25/file2",
                               user: admin)
+f2.prepared = true
+f2.save
+
 d = FileEntity::Folder.mk_dir(name: "My folder test",
                               real_path: "hdfs://dir1/node25/folder",
                               user: admin)
+d.prepared = true
+d.save
+
 f3 = FileEntity::File.mk_file(name: "My file 2",
                               real_path: "hdfs://dir1/node25/file3",
                               user: admin,
                               parent: d)
+f3.prepared = true
+f3.save
 
 # need PermitManager
 DocumentPermission.create!(document: f, user: user1, action: Action::Read)

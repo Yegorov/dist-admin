@@ -30,6 +30,7 @@ class Document < ApplicationRecord
   has_many :permissions, class_name: "DocumentPermission"
 
   scope :roots, ->() { where(parent_iid: nil)}
+  scope :available, ->{ where(deleted: false, prepared: true) }
 
   def folder?
     self.type == FileEntity::Folder.to_s

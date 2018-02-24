@@ -41,7 +41,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  ADMIN = 1
+  enum role: { admin: 1, user: 2 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -61,7 +61,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    self.role == ADMIN
+    self.role == "admin"
   end
 
   def soft_delete
