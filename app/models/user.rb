@@ -5,7 +5,7 @@
 #  id                     :integer          not null, primary key
 #  name                   :string
 #  login                  :string           not null
-#  role                   :integer          default(2), not null
+#  role                   :integer          default("user"), not null
 #  banned                 :boolean          default(FALSE), not null
 #  deleted                :boolean          default(FALSE), not null
 #  document_sequence      :integer          default(0), not null

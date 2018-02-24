@@ -3,7 +3,7 @@ class CreateScripts < ActiveRecord::Migration[5.1]
     create_table :scripts do |t|
       t.string :name, null: false
       t.references :owner
-      t.text :content, null: false, default: ""
+      t.text :description, null: false, default: ""
       t.text :mapper, null: false, default: ""
       t.text :reducer, null: false, default: ""
       t.text :input, null: false, default: ""

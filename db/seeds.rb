@@ -8,7 +8,7 @@
 admin_pass = ENV.fetch('ADMIN_PASSWORD', "12345678")
 email_admin = ENV.fetch('ADMIN_EMAIL', "yegorov0725@yandex.ru")
 admin = User.create!(name: "Admin", login: "admin", email: email_admin,
-             password: admin_pass, role: User::ADMIN)
+             password: admin_pass, role: :admin)
 admin.confirm
 
 guest = User.create!(name: "Guest", login: "guest", email: "guest@example.com",
