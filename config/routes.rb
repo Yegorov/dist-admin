@@ -11,16 +11,15 @@ Rails.application.routes.draw do
   get 'about', to: "home#about", as: :about
   get 'help', to: "home#help", as: :help
 
-  get ':login', to: "profile#show", as: :profile
-  get ':login/settings', to: "profile#edit", as: :profile_settings
+  #get ':login', to: "profiles#show", as: :profile
+  #get ':login/settings', to: "profiles#edit", as: :profile_settings
+
+  resources :profiles, param: :login, only: [:show, :edit, :update]
 
   scope ':login' do
     resources :documents do
+      resources :permissions, shallow: true
       resources :logs, only: [:index, :show], controller: 'document/logs'
-    end
-
-    scope 'documents' do
-      resources :permissions, controller: 'document/permissions'
     end
 
     resources :tasks do
