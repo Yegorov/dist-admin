@@ -47,6 +47,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
+  has_many :documents, foreign_key: "owner_id", dependent: :delete_all
+  has_many :tasks, foreign_key: "creator_id", dependent: :delete_all
+  has_many :scripts, foreign_key: "owner_id", dependent: :delete_all
+
   validates :name, :login, :email, presence: true
   validates :login, :email, uniqueness: true
   validates :login, length: { minimum: 5, maximum: 50 },

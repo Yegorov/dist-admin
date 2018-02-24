@@ -20,4 +20,5 @@
 class Task < ApplicationRecord
   include TaskState
   belongs_to :creator, class_name: "User"
+  has_many :logs, class_name: 'TaskLog'
 end

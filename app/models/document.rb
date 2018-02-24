@@ -26,6 +26,8 @@
 class Document < ApplicationRecord
   belongs_to :owner, class_name: "User"
   belongs_to :creator, class_name: "User"
+  has_many :logs, class_name: "DocumentActionLog"
+  has_many :permissions, class_name: "DocumentPermission"
 
   def folder?
     self.type == FileEntity::Folder.to_s
