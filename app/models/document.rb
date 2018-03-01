@@ -26,8 +26,8 @@
 class Document < ApplicationRecord
   belongs_to :owner, class_name: "User"
   belongs_to :creator, class_name: "User"
-  has_many :logs, class_name: "DocumentActionLog"
-  has_many :permissions, class_name: "DocumentPermission"
+  has_many :logs, class_name: "DocumentActionLog", dependent: :delete_all
+  has_many :permissions, class_name: "DocumentPermission", dependent: :delete_all
 
   scope :roots, ->() { where(parent_iid: nil)}
   scope :available, ->{ where(deleted: false, prepared: true) }

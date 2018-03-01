@@ -20,7 +20,7 @@
 class Task < ApplicationRecord
   include TaskState
   belongs_to :owner, class_name: "User"
-  has_many :logs, class_name: 'TaskLog'
+  has_many :logs, class_name: 'TaskLog', dependent: :delete_all 
 
   state_machine :state, attribute: :state, initial: :created do
     # state :created, value: 0
@@ -40,13 +40,10 @@ class Task < ApplicationRecord
       task.update_column(:"#{transition.to}_at", Time.zone.now)
     end
 
-    after_transition stopped: :restarted { |task| task.start }
-
     after_transition on: :start, do: :start_task
 
     event :start do
       transition created: :started
-      transition restarted: :started
     end
 
     event :stop do
@@ -54,7 +51,7 @@ class Task < ApplicationRecord
     end
 
     event :restart do
-      transition stopped: :restarted
+      transition stopped: :started
     end
 
     event :finish do
