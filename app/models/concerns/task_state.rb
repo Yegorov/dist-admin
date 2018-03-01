@@ -8,6 +8,6 @@ module TaskState
       stopped: 4, 
       restarted: 5, 
       finished: 6
-    }
+    }, _prefix: :state
   end
 end

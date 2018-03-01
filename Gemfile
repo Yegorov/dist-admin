@@ -40,6 +40,7 @@ gem 'webpacker', '~> 3.2'
 gem 'slim-rails', '~> 3.1.2'
 gem 'devise', '~> 4.4.1'
 gem 'kaminari', '~> 1.1.1'
+gem 'state_machines-activerecord', '~> 0.5.0'
 
 
 group :development, :test do
