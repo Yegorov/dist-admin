@@ -62,8 +62,9 @@ DocumentPermission.create!(document: f, user: user1, action: Action::Read)
 DocumentPermission.create!(document: f, user: user1, action: Action::Update)
 DocumentPermission.create!(document: f1, user: user1, action: Action::Write)
 
-# need TaskManager
-admin.tasks.create!(name: "My Task 1")
+s = admin.scripts.create!(name: "Map reduce world splitter")
 
-admin.scripts.create!(name: "Map reduce world splitter")
+# need TaskManager
+admin.tasks.create!(name: "My Task 1", script: s)
+
 

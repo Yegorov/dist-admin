@@ -20,6 +20,9 @@
 #
 
 class Script < ApplicationRecord
-  belongs_to :owner, class_name: "User"
   enum language: { python: 1, ruby: 2, go: 3, javascript: 4 }
+
+  belongs_to :owner, class_name: "User"
+  has_many :tasks
+
 end

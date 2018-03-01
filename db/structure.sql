@@ -16,8 +16,9 @@ CREATE UNIQUE INDEX "idx_user_document_action" ON "document_permissions" ("user_
 CREATE TABLE "document_action_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "document_id" integer, "action" integer, "message" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_document_action_logs_on_user_id" ON "document_action_logs" ("user_id");
 CREATE INDEX "index_document_action_logs_on_document_id" ON "document_action_logs" ("document_id");
-CREATE TABLE "tasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar DEFAULT '' NOT NULL, "state" integer DEFAULT 0 NOT NULL, "owner_id" integer, "started_at" datetime, "stopped_at" datetime, "finished_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE TABLE "tasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar DEFAULT '' NOT NULL, "state" integer DEFAULT 0 NOT NULL, "owner_id" integer, "script_id" integer, "started_at" datetime, "stopped_at" datetime, "finished_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_tasks_on_owner_id" ON "tasks" ("owner_id");
+CREATE INDEX "index_tasks_on_script_id" ON "tasks" ("script_id");
 CREATE TABLE "task_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "state" integer, "task_id" integer, "message" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_task_logs_on_task_id" ON "task_logs" ("task_id");
 CREATE TABLE "scripts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "owner_id" integer, "description" text DEFAULT '' NOT NULL, "mapper" text DEFAULT '' NOT NULL, "reducer" text DEFAULT '' NOT NULL, "input" text DEFAULT '' NOT NULL, "output" text DEFAULT '' NOT NULL, "language" integer DEFAULT 1 NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);

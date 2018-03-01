@@ -6,6 +6,7 @@
 #  name        :string           default(""), not null
 #  state       :integer          default("created"), not null
 #  owner_id    :integer
+#  script_id   :integer
 #  started_at  :datetime
 #  stopped_at  :datetime
 #  finished_at :datetime
@@ -14,13 +15,20 @@
 #
 # Indexes
 #
-#  index_tasks_on_owner_id  (owner_id)
+#  index_tasks_on_owner_id   (owner_id)
+#  index_tasks_on_script_id  (script_id)
 #
 
 class Task < ApplicationRecord
   include TaskState
   belongs_to :owner, class_name: "User"
-  has_many :logs, class_name: 'TaskLog', dependent: :delete_all 
+  belongs_to :script
+  has_many :logs, class_name: 'TaskLog', dependent: :delete_all
+
+  # running (or strted) tasks
+  scope :launched, ->{ where(state: :started) }
+  # finished tasks
+  scope :completed, ->{ where(state: :finished) }
 
   state_machine :state, attribute: :state, initial: :created do
     # state :created, value: 0
@@ -63,4 +71,13 @@ class Task < ApplicationRecord
     puts "Run real hadoop task" # call in Task manager TastManager.start
     # process id, stdout hadoop task
   end
+
+  def running_time
+    finished_at.try do |finish|
+      started_at.try do |start|
+        finish - start
+      end
+    end
+  end
+
 end
