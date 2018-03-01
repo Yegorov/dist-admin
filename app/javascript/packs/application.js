@@ -19,6 +19,13 @@ import 'selectize'
 //import 'popper'
 import 'bootstrap'
 
+import ace from 'brace'
+import 'brace/mode/python'
+import 'brace/mode/ruby'
+import 'brace/mode/golang'
+import 'brace/mode/javascript'
+import 'brace/theme/monokai'
+
 
 $(document).on('turbolinks:load', function() {
   $('#input-tags').selectize({
@@ -31,7 +38,16 @@ $(document).on('turbolinks:load', function() {
           }
       }
   });
+
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.session.setMode("ace/mode/python");
+  //editor.session.setMode('ace/mode/ruby')
+  editor.session.setTabSize(4);
+  //editor.session.setUseSoftTabs(false);
+  //editor.session.setOptions({ tabSize: 2, useSoftTabs: true });
 });
+
 
 Rails.start();
 Turbolinks.start();
