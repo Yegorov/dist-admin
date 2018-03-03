@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'errors/show404'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
@@ -14,9 +17,16 @@ Rails.application.routes.draw do
   #get ':login', to: "profiles#show", as: :profile
   #get ':login/settings', to: "profiles#edit", as: :profile_settings
 
-  resources :profiles, param: :login, only: [:show, :edit, :update]
+  # get 'profile', to: "profiles#show", param: :login, as: :profile
+  # get 'settings', to: "profiles#edit", param: :login, as: :profile_settings
+  # post 'settings', to: "profiles#update", param: :login, as: :profile_settings 
+  #resources :profiles, param: :login, only: [:show, :edit, :update]
 
   scope ':login' do
+    get 'profile', to: "profiles#show", as: :profile
+    get 'settings', to: "profiles#edit", as: :profile_settings
+    post 'settings', to: "profiles#update"
+
     resources :documents do
       get 'page/:page', action: :index, on: :collection # for kaminari
       resources :permissions, shallow: true
@@ -29,6 +39,8 @@ Rails.application.routes.draw do
 
     resources :scripts
   end
+
+  get '*path', to: "errors#show404"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

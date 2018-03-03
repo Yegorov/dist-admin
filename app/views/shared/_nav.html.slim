@@ -24,7 +24,7 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
           | Help
       - if current_user.present?
         li class="nav-item #{active?(profile_path(current_user))}"
-          a class="nav-link" href="#{profile_path(current_user)}" Profile
+          a class="nav-link" href="#{profile_path(current_user)}" My Profile
         li class="nav-item #{active?(tasks_path(login: current_user.login))}"
           a class="nav-link" href="#{tasks_path(login: current_user.login)}" Tasks
         li class="nav-item"
