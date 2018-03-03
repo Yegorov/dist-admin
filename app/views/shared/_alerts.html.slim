@@ -1,3 +1,4 @@
+- flash.delete(:timedout)
 - flash.each do |key, msg|
   - key = key == 'notice' ? 'primary' : (key == 'alert' ? 'warning' : key)
   div class="alert alert-#{key}" role="alert"
