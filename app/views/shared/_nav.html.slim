@@ -13,15 +13,6 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
 
   div class="collapse navbar-collapse" id="navbarsExampleDefault"
     ul class="navbar-nav mr-auto"
-      li class="nav-item #{active?(root_path)}"
-        a class="nav-link" href="#{root_path}"
-          | Home
-      li class="nav-item #{active?(about_path)}"
-        a class="nav-link" href="#{about_path}"
-          | About
-      li class="nav-item #{active?(help_path)}"
-        a class="nav-link" href="#{help_path}"
-          | Help
       - if current_user.present?
         li class="nav-item #{active?(profile_path(current_user))}"
           a class="nav-link" href="#{profile_path(current_user)}" My Profile
@@ -35,9 +26,12 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
             a class="dropdown-item" href="#" Action
             a class="dropdown-item" href="#" Another action
             a class="dropdown-item" href="#" Something else here
+      - else
+        = render 'shared/general_links'
     ul class="navbar-nav navbar-right"
       li class="nav-item"
         - if current_user.present?
+          = render 'shared/general_links'
           = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link'
         - else
           = link_to "Sign in", new_user_session_path, class: "nav-link #{active?(new_user_session_path)}"

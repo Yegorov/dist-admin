@@ -1,2 +1,7 @@
 h1 Profiles#show
 p Find me in app/views/profiles/show.html.slim
+
+- if current_user?(@user)
+  p It's you profile
+- else
+  p It's not you profile
