@@ -6,4 +6,8 @@ class HomeController < ApplicationController
     # flash.now[:warning] = "Now is warning!"
     # flash.now[:info] = "Now is info!"
   end
+  def about
+  end
+  def help
+  end
 end
