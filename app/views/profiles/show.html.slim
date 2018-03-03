@@ -1,9 +1,23 @@
-h1 Profiles#show
-p Find me in app/views/profiles/show.html.slim
-
-
-
-- if current_user?(@user)
-  p It's you profile
+h1 Profile
+- if current_user?(@user) || @user.public
+  table class="table"
+    tbody
+      tr
+        td Name
+        td = @user.name
+      tr
+        td Login
+        td = @user.login
+      tr
+        td Email
+        td = @user.email
+      tr
+        td Role
+        td = @user.role
+      tr
+        td Public
+        td = check_box_tag '', '', @user.public, disabled: true
+  - if current_user?(@user)
+    = link_to 'Edit', profile_edit_path(@user), class: "btn btn-primary"
 - else
-  p It's not you profile
+  p = "User '#{@user.name}' has hidden his profile"

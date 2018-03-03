@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   scope ':login' do
     get 'profile', to: "profiles#show", as: :profile
-    get 'settings', to: "profiles#edit", as: :profile_settings
+    get 'settings', to: "profiles#edit", as: :profile_edit
     post 'settings', to: "profiles#update"
 
     resources :documents do

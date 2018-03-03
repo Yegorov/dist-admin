@@ -1,2 +1,20 @@
-h1 Profiles#edit
-p Find me in app/views/profiles/edit.html.slim
+h1 Edit your profile
+
+- if @user.errors.any?
+  #error_explanation
+    h2 = pluralize(@user.errors.count, "error")
+    ul
+      - @user.errors.full_messages.each do |msg|
+        li = msg
+
+= form_for(@user, url: profile_edit_path(@user), method: :post) do |f|
+  table class="table"
+    tbody
+      tr
+        td = f.label :name
+        td = f.text_field :name
+      tr
+        td = f.label :public
+        td = f.check_box :public
+  = f.submit class: "btn btn-success"
+  = link_to "Cancel", profile_path(@user), class: "btn btn-secondary"
