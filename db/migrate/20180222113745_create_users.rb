@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.integer :role, null: false, default: 2
       t.boolean :banned, null: false, default: false
       t.boolean :deleted, null: false, default: false
+      t.boolean :public, null: false, default: false
       t.integer :document_sequence, null: false, default: 0
 
       t.timestamps

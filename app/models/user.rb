@@ -8,6 +8,7 @@
 #  role                   :integer          default("user"), not null
 #  banned                 :boolean          default(FALSE), not null
 #  deleted                :boolean          default(FALSE), not null
+#  public                 :boolean          default(FALSE), not null
 #  document_sequence      :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
