@@ -17,6 +17,12 @@ class ScriptsController < ApplicationController
   def edit
   end
 
+  def update
+  end
+
+  def destroy
+  end
+
   private
   def find_script
     @script = Script.owned(current_user).find(params[:id])

@@ -70,14 +70,43 @@ function initAce() {
 
   initEditor('mapper-code');
   initEditor('reducer-code');
+
+   $(function () {
+        $('textarea.ace').each(function () {
+            var textarea = $(this);
+            var language = textarea.data('language');
+            var editDiv = $('<div>', {
+                //position: 'absolute',
+                //width: textarea.width(),
+                //height: textarea.height(),
+                //'class': textarea.attr('class')
+            }).insertBefore(textarea);
+            textarea.css('visibility', 'hidden');
+            textarea.css('display', 'none');
+            var editor = ace.edit(editDiv[0]);
+            //editor.renderer.setShowGutter(false);
+            editor.getSession().setValue(textarea.val());
+            editor.getSession().setMode("ace/mode/" + language);
+            editor.setTheme("ace/theme/monokai");
+            // editor.setTheme("ace/theme/idle_fingers");
+            editor.session.setTabSize(4);
+            editor.session.setUseSoftTabs(false);
+            editor.setReadOnly(false);
+            
+            // copy back to textarea on form submit...
+            textarea.closest('form').submit(function () {
+                textarea.val(editor.getSession().getValue());
+            })
+        });
+    });
+
 }
 
 function initEditor(id_elem) {
   var el = $('#' + id_elem);
-  if (el != null) {
+  if (el.length) {
     var language = el.data('language');
     var readonly = el.data('readonly') || false;
-    console.log(readonly)
     var editor = ace.edit(id_elem);
 
     editor.setTheme("ace/theme/monokai");

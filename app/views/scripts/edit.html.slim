@@ -1,2 +1,32 @@
-h1 Scripts#edit
-p Find me in app/views/scripts/edit.html.slim
+h1 Edit Script
+
+= form_for(@script) do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control form-control-lg"
+  
+  .form-group
+    = f.label :language
+    = f.select :language, options_for_select(Script.languages, Script.languages[@script.language]), {}, class: "form-control"
+
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: "form-control", rows: 7
+
+  .form-group
+    = f.label :mapper
+    = f.text_area :mapper, class: "ace", data: { language: "#{@script.language}", readonly: false }
+
+  .form-group
+    = f.label :reducer
+    = f.text_area :reducer, class: "ace", data: { language: "#{@script.language}", readonly: false }
+
+  .form-group
+    = f.label :input
+    = f.text_field :input, class: "form-control"
+
+  .form-group
+    = f.label :output
+    = f.text_field :output, class: "form-control"
+
+  = f.submit "Save script", class: "btn btn-primary"
