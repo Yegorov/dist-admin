@@ -15,7 +15,7 @@ h3
 
 h3 Description:
 .description
-  = @script.description.presence || "Not present"
+  p = @script.description.presence || "Not present"
 
 h2.mapper Mapper
 pre#mapper-code [data-language="#{@script.language}" data-readonly="true"]

@@ -1,2 +1,4 @@
-h1 Scripts#new
-p Find me in app/views/scripts/new.html.slim
+.clearfix
+  h1 class="float-left" Create script
+  = back_to_index('scripts')
+= render 'form', script: @script

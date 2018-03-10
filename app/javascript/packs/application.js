@@ -89,8 +89,8 @@ function initAce() {
             editor.getSession().setMode("ace/mode/" + language);
             editor.setTheme("ace/theme/monokai");
             // editor.setTheme("ace/theme/idle_fingers");
-            editor.session.setTabSize(4);
-            editor.session.setUseSoftTabs(false);
+            editor.session.setTabSize(language == "ruby" ? 2 : 4);
+            editor.session.setUseSoftTabs(true);
             editor.setReadOnly(false);
             
             // copy back to textarea on form submit...
@@ -111,8 +111,8 @@ function initEditor(id_elem) {
 
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/" + language);
-    editor.session.setTabSize(4);
-    editor.session.setUseSoftTabs(false);
+    editor.session.setTabSize(language == "ruby" ? 2 : 4);
+    editor.session.setUseSoftTabs(true);
     editor.setReadOnly(readonly);
   }
 }
