@@ -62,7 +62,9 @@ DocumentPermission.create!(document: f, user: user1, action: Action::Read)
 DocumentPermission.create!(document: f, user: user1, action: Action::Update)
 DocumentPermission.create!(document: f1, user: user1, action: Action::Write)
 
-s = admin.scripts.create!(name: "Map reduce world splitter")
+50.times do |n|
+  s = admin.scripts.create!(name: "Map reduce world splitter #{n}")
+end
 
 # need TaskManager
 admin.tasks.create!(name: "My Task 1", script: s)

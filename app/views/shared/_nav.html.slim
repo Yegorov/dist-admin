@@ -18,6 +18,8 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
           a class="nav-link" href="#{profile_path(current_user)}" My Profile
         li class="nav-item #{active?(tasks_path(login: current_user.login))}"
           a class="nav-link" href="#{tasks_path(login: current_user.login)}" Tasks
+        li class="nav-item #{active?(scripts_path(login: current_user.login))}"
+          a class="nav-link" href="#{scripts_path(login: current_user.login)}" Scripts
         li class="nav-item"
           a class="nav-link disabled" href="#" Activity
         li class="nav-item dropdown"

@@ -1,0 +1,24 @@
+h1 class="float-left" Scripts
+button type="button" class="btn btn-primary float-right"
+  | Create new script
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Name
+      th scope="col" Date (update)
+      th scope="col" Actions
+  tbody
+    - @scripts.each_with_index do |script, idx|
+      - idx = (@scripts.current_page - 1) * @scripts.current_per_page + (idx + 1)
+      tr
+        td = idx
+        td = script.name
+        td = script.updated_at
+        td
+          button type="button" class="btn btn-success mr-2" Open
+          button type="button" class="btn btn-warning mr-2" Edit
+          button type="button" class="btn btn-danger" Remove
+
+= paginate @scripts

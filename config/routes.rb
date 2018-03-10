@@ -37,7 +37,9 @@ Rails.application.routes.draw do
       resources :logs, only: [:index, :show], controller: 'task/logs'
     end
 
-    resources :scripts
+    resources :scripts do
+      get 'page/:page', action: :index, on: :collection # for kaminari
+    end
   end
 
   get '*path', to: "errors#show404"
