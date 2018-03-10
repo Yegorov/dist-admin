@@ -19,7 +19,7 @@ module ApplicationHelper
 
   def back_to_index(resource_name)
     content_tag :div do
-      link_to "Back", send(:"#{resource_name.pluralize}_path"),
+      link_to "#{resource_name.pluralize.camelize}", send(:"#{resource_name.pluralize}_path"),
                       class: "btn btn-secondary float-right"
     end
   end

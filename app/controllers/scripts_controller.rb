@@ -29,7 +29,6 @@ class ScriptsController < ApplicationController
   end
 
   def update
-
     if @script.update(script_params)
       redirect_to script_url(@script, login: current_user)
     else
@@ -38,11 +37,15 @@ class ScriptsController < ApplicationController
   end
 
   def destroy
+    @script.destroy
+    redirect_to scripts_url(login: current_user)
   end
 
   private
   def find_script
     @script = Script.owned(current_user).find(params[:id])
+  rescue
+    show404
   end
   def script_params
     params.require(:script).permit(:name, :description, :mapper, :reducer,
