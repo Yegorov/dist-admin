@@ -1,6 +1,6 @@
 class ScriptsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_script, only: [:show, :new, :edit]
+  before_action :find_script, only: [:show, :edit]
 
   def index
     @scripts = Script.order(updated_at: :desc)
