@@ -39,6 +39,8 @@ $(document).on('turbolinks:load', function() {
       }
   });
 
+  initAce();
+
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   editor.session.setMode("ace/mode/python");
@@ -46,8 +48,42 @@ $(document).on('turbolinks:load', function() {
   editor.session.setTabSize(4);
   //editor.session.setUseSoftTabs(false);
   //editor.session.setOptions({ tabSize: 2, useSoftTabs: true });
-});
 
+});
 
 Rails.start();
 Turbolinks.start();
+
+function initAce() {
+  // var mapper = $('#mapper-code');
+  // if (mapper != null) {
+  //   var language = mapper.data('language');
+  //   console.log(language);
+  //   var editor = ace.edit('mapper-code');
+  //   console.log(editor);
+  //   editor.setTheme("ace/theme/monokai");
+  //   editor.session.setMode("ace/mode/" + language);
+  //   editor.session.setTabSize(4);
+  //   editor.session.setUseSoftTabs(false);
+  //   editor.setReadOnly(true);
+  // }
+
+  initEditor('mapper-code');
+  initEditor('reducer-code');
+}
+
+function initEditor(id_elem) {
+  var el = $('#' + id_elem);
+  if (el != null) {
+    var language = el.data('language');
+    var readonly = el.data('readonly') || false;
+    console.log(readonly)
+    var editor = ace.edit(id_elem);
+
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/" + language);
+    editor.session.setTabSize(4);
+    editor.session.setUseSoftTabs(false);
+    editor.setReadOnly(readonly);
+  }
+}

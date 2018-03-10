@@ -1,3 +1,36 @@
-h1 Scripts#show
-= back_to_index('scripts')
-p Find me in app/views/scripts/show.html.slim
+.clearfix
+  /h1 class="float-left" Script
+  h1 class="float-left"
+    | Script:&nbsp;
+    = @script.name
+  = back_to_index('scripts')
+
+/h2.name
+  = @script.name
+
+h3
+  | Language:&nbsp;
+  span class="badge badge-primary"
+    = @script.language
+
+h3 Description:
+.description
+  = @script.description.presence || "Not present"
+
+h2.mapper Mapper
+pre#mapper-code [data-language="#{@script.language}" data-readonly="true"]
+  = @script.mapper
+
+h2.mapper Reducer
+pre#reducer-code [data-language="#{@script.language}" data-readonly="true"]
+  = @script.reducer
+
+h3 Input file:
+input.input-file readonly = @script.input
+
+h3 Output file:
+input.output-file readonly = @script.output
+
+.actions class="mt-4"
+  = link_to "Edit", edit_script_path(@script), class: "btn btn-warning mr-2"
+  = link_to "Remove", script_path(@script), method: :delete, class: "btn btn-danger"
