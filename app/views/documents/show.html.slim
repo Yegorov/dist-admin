@@ -1,7 +1,5 @@
-h1 Documents#show
-p Find me in app/views/documents/show.html.slim
+h1 = @document.type_s
 
-h2 id
-p = @document.id
-h2 iid
-p = @document.iid
+h2 = @document.name
+
+= link_to "Permissions",  document_permissions_path(@document.iid), class: "btn btn-primary"

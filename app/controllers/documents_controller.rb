@@ -18,15 +18,19 @@ class DocumentsController < ApplicationController
     else
       @documents = @documents.roots
     end
+
+    @to = @document.present? ? @document.iid : "root"
   end
 
   def show
   end
 
   def edit
+    # edit name
   end
 
   def destroy
+    # sofyt delete
     @document.deleted = true
     @document.save
     if @document.parent_iid.present?
@@ -34,6 +38,20 @@ class DocumentsController < ApplicationController
     else
       redirect_to documents_path
     end
+  end
+
+  def new_file
+    # show form for upload file
+    # params[:to]
+  end
+
+  def create_file
+  end
+
+  def new_folder
+    # show form for create folder
+  end
+  def create_folder
   end
 
   private

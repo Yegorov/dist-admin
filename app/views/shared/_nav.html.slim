@@ -22,8 +22,6 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
           a class="nav-link" href="#{tasks_path(login: current_user.login)}" Tasks
         li class="nav-item #{active?(scripts_path(login: current_user.login))}"
           a class="nav-link" href="#{scripts_path(login: current_user.login)}" Scripts
-        li class="nav-item"
-          a class="nav-link disabled" href="#" Upload file
         li class="nav-item dropdown"
           a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Create
           div class="dropdown-menu" aria-labelledby="dropdown01"

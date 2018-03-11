@@ -27,10 +27,17 @@ Rails.application.routes.draw do
     get 'settings', to: "profiles#edit", as: :profile_edit
     post 'settings', to: "profiles#update"
 
-    resources :documents, param: :iid, only: [:index, :show, :edit, :destroy] do
+    resources :documents, param: :iid, except: [:new, :create] do
       get 'page/:page', action: :index, on: :collection # for kaminari
       get 'folder/:folder', action: :index, on: :collection, as: :folder
       get 'folder/:folder/page/:page', action: :index, on: :collection # for kaminari
+
+      get 'new-file', action: :new_file, on: :collection, as: :new_file
+      post 'new-file', action: :create_file, on: :collection
+
+      get 'new-folder', action: :new_folder, on: :collection, as: :new_folder
+      post 'new-folder', action: :create_folder, on: :collection
+
       resources :permissions, shallow: true
       resources :logs, only: [:index, :show], controller: 'document/logs'
     end

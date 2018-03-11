@@ -1,4 +1,7 @@
-h1 Documents
+.clearfix
+  h1 class="float-left" Documents
+  = link_to "Create folder", new_folder_documents_path(to: @to), class: "btn btn-success float-right mr-2"
+  = link_to "Upload file", new_file_documents_path(to: @to), class: "btn btn-success float-right mr-2"
 
 table class="table documents" cellpadding="0" cellspacing="0"
   thead
