@@ -62,6 +62,7 @@ DocumentPermission.create!(document: f, user: user1, action: Action::Read)
 DocumentPermission.create!(document: f, user: user1, action: Action::Update)
 DocumentPermission.create!(document: f1, user: user1, action: Action::Write)
 
+s = nil
 50.times do |n|
   s = admin.scripts.create!(name: "Map reduce world splitter #{n}")
 end
@@ -69,4 +70,19 @@ end
 # need TaskManager
 admin.tasks.create!(name: "My Task 1", script: s)
 
-
+ff = nil
+50.times do |n|
+  ff = FileEntity::Folder.mk_dir(name: "My folder #{n}",
+                                real_path: "hdfs://dir1/node25/folder",
+                                user: admin)
+  ff.prepared = true
+  ff.save
+end
+50.times do |n|
+  ff1 = FileEntity::Folder.mk_dir(name: "My test folder #{n}",
+                                real_path: "hdfs://dir1/node25/file1",
+                                user: admin,
+                                parent: ff)
+  ff1.prepared = true
+  ff1.save
+end

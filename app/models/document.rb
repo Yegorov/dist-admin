@@ -30,7 +30,9 @@ class Document < ApplicationRecord
   has_many :permissions, class_name: "DocumentPermission", dependent: :delete_all
 
   scope :roots, ->() { where(parent_iid: nil)}
+  scope :in_folder, ->(document) { where(parent_iid: document.iid) }
   scope :available, ->{ where(deleted: false, prepared: true) }
+  scope :owned, ->(user){ where(owner: user) }
 
   def folder?
     self.type == FileEntity::Folder.to_s
@@ -38,6 +40,15 @@ class Document < ApplicationRecord
 
   def file?
     self.type == FileEntity::File.to_s
+  end
+  def type_s
+    if file?
+      "File"
+    elsif folder?
+      "Folder"
+    else
+      ""
+    end
   end
 
   protected

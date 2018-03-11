@@ -1,0 +1,36 @@
+h1 Documents
+
+table class="table documents" cellpadding="0" cellspacing="0"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Name
+      th scope="col" Date (update)
+      th scope="col" Type
+      th scope="col" Actions
+  tbody
+    - if @document
+      tr
+        td [colspan="5"] = link_to ".", folder_documents_path(@document.iid), class: "current"
+      tr
+        - if @document.parent_iid.present?
+          td [colspan="5"] = link_to "..", folder_documents_path(@document.parent_iid), class: "parent"
+        - else # root
+          td [colspan="5"] = link_to "..", documents_path, class: "parent"
+    - @documents.each_with_index do |document, idx|
+      - idx = (@documents.current_page - 1) * @documents.current_per_page + (idx + 1)
+      /tr [onclick="#{document.folder? ? "window.location.href = \'#{folder_documents_path(document.iid)}\';" : ""}" style="cursor: pointer;"]
+      tr
+        td = idx
+        td
+          - if document.folder?
+            = link_to document.name, folder_documents_path(document.iid)
+          - else
+            = document.name
+        td = document.updated_at
+        td = document.type_s
+        td
+          = link_to "Property", document_path(document.iid), class: "btn btn-primary mr-2"
+          = link_to "Remove", document_path(document), method: :delete, class: "btn btn-danger"
+
+= paginate @documents 
