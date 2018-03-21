@@ -18,11 +18,17 @@
 require 'digest'
 
 class Encryptor < ApplicationRecord
+  CIPHERS = [
+    'aes-256-cbc', 'camellia-256-cbc', 'aes-256-ecb'
+  ]
+
   belongs_to :document
   attr_accessor :pass_phrase
 
   validates :pass_phrase, :cipher, presence: true
   validates :pass_phrase, length: { in: 7..50 }
+  validates :cipher, inclusion: { in: CIPHERS }
+
   before_create do
     self.pass_phrase_salt = SecureRandom.urlsafe_base64(n=20)
     self.pass_phrase_hash = get_pass_phrase_hash(pass_phrase)
