@@ -1,9 +1,10 @@
 module ApplicationHelper
-  def url_options(options={})
-    if current_user.present?
-      options.merge(login: current_user.login)
+  def url_options
+    if current_user.present? &&
+      (self.class.name && !self.class.name.include?("RailsAdmin"))
+      { login: current_user.login }.merge(super)
     else
-      options
+      super
     end
   end
 

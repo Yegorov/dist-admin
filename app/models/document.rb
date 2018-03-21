@@ -29,6 +29,7 @@ class Document < ApplicationRecord
   has_many :logs, class_name: "DocumentActionLog", dependent: :delete_all
   has_many :permissions, class_name: "DocumentPermission", dependent: :delete_all
   has_one :encryptor, dependent: :delete
+  #accepts_nested_attributes_for :encryptor, :allow_destroy => true
 
   scope :roots, ->() { where(parent_iid: nil)}
   scope :in_folder, ->(document) { where(parent_iid: document.iid) }
@@ -57,6 +58,10 @@ class Document < ApplicationRecord
     else
       false
     end
+  end
+
+  def encryptor_id
+    self.encryptor.try :id
   end
 
   protected
