@@ -23,6 +23,11 @@ CREATE TABLE "task_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stat
 CREATE INDEX "index_task_logs_on_task_id" ON "task_logs" ("task_id");
 CREATE TABLE "scripts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "owner_id" integer, "description" text DEFAULT '' NOT NULL, "mapper" text DEFAULT '' NOT NULL, "reducer" text DEFAULT '' NOT NULL, "input" text DEFAULT '' NOT NULL, "output" text DEFAULT '' NOT NULL, "language" integer DEFAULT 1 NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_scripts_on_owner_id" ON "scripts" ("owner_id");
+CREATE TABLE "encryptors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "document_id" integer, "cipher" varchar, "pass_phrase_hash" varchar, "pass_phrase_salt" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_9737e87569"
+FOREIGN KEY ("document_id")
+  REFERENCES "documents" ("id")
+);
+CREATE INDEX "index_encryptors_on_document_id" ON "encryptors" ("document_id");
 INSERT INTO "schema_migrations" (version) VALUES
 ('20180222113745'),
 ('20180222114505'),
@@ -31,6 +36,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180223094239'),
 ('20180223203722'),
 ('20180223204300'),
-('20180223205658');
+('20180223205658'),
+('20180321085307');
 
 

@@ -28,6 +28,7 @@ class Document < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :logs, class_name: "DocumentActionLog", dependent: :delete_all
   has_many :permissions, class_name: "DocumentPermission", dependent: :delete_all
+  has_one :encryptor, dependent: :delete
 
   scope :roots, ->() { where(parent_iid: nil)}
   scope :in_folder, ->(document) { where(parent_iid: document.iid) }
@@ -48,6 +49,13 @@ class Document < ApplicationRecord
       "Folder"
     else
       ""
+    end
+  end
+  def encrypted?
+    if file?
+      encryptor.present?
+    else
+      false
     end
   end
 
