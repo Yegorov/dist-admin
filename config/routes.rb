@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :tasks, only: [:index, :show, :new, :create] do
       resources :logs, only: [:index, :show], controller: 'task/logs'
       post 'start', on: :member, as: :start
+      post 'restart', on: :member, as: :restart
       post 'stop', on: :member, as: :stop
     end
 

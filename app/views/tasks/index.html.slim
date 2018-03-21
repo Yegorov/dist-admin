@@ -19,9 +19,12 @@ table class="table"
         td = task.updated_at
         td
           = link_to "Open", task_path(task), class: "btn btn-success mr-2"
-          - if task.can_start?
-            = link_to "Start", start_task_path(task), method: :post, class: "btn btn-danger mr-2"
-          - if task.can_stop?
-            = link_to "Stop", stop_task_path(task), method: :post, class: "btn btn-danger mr-2"
+          - if task.prepared
+            - if task.can_start?
+              = link_to "Start", start_task_path(task), method: :post, class: "btn btn-danger mr-2"
+            - if task.can_restart?
+              = link_to "Restart", restart_task_path(task), method: :post, class: "btn btn-danger mr-2"
+            - if task.can_stop?
+              = link_to "Stop", stop_task_path(task), method: :post, class: "btn btn-danger mr-2"
 
 = paginate @tasks

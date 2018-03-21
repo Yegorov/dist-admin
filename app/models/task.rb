@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  name        :string           default(""), not null
 #  state       :integer          default("created"), not null
+#  prepared    :boolean          default(TRUE), not null
 #  owner_id    :integer
 #  script_id   :integer
 #  started_at  :datetime
@@ -31,12 +32,17 @@ class Task < ApplicationRecord
   scope :completed, ->{ where(state: :finished) }
 
   scope :owned, ->(user) { where(owner: user) }
+  scope :prepared, -> { where(prepared: true) }
 
   state_machine :state, attribute: :state, initial: :created do
     # state :created, value: 0
     # Task.states.each do |state_name, value|
     #   state :"state_name", value: value
     # end
+
+    before_transition do |task, transition|
+      task.update_column(:prepared, false)
+    end
 
     after_transition do |task, transition|
       # add to log
@@ -53,19 +59,19 @@ class Task < ApplicationRecord
     after_transition on: :start, do: :start_task
 
     event :start do
-      transition created: :started
+      transition created: :started, if: :prepared?
     end
 
     event :stop do
-      transition started: :stopped
+      transition started: :stopped, if: :prepared?
     end
 
     event :restart do
-      transition stopped: :started
+      transition stopped: :started, if: :prepared?
     end
 
     event :finish do
-      transition started: :finished
+      transition started: :finished, if: :prepared?
     end
   end
 
@@ -80,6 +86,11 @@ class Task < ApplicationRecord
         finish - start
       end
     end
+  end
+
+  def prepared!
+    # need call when real task ready
+    self.update_column(:prepared, true)
   end
 
 end

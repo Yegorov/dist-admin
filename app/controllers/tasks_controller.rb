@@ -33,6 +33,10 @@ class TasksController < ApplicationController
 
     redirect_to task_path(@task), alert: "Task be started ..."
   end
+  def restart
+
+    redirect_to task_path(@task), alert: "Task be restarted ..."
+  end
   def stop
 
     redirect_to task_path(@task), alert: "Task be stopped ..."
