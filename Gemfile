@@ -42,6 +42,7 @@ gem 'devise', '~> 4.4.1'
 gem 'kaminari', '~> 1.1.1'
 gem 'state_machines-activerecord', '~> 0.5.0'
 gem 'rails_admin', '~> 1.3'
+gem 'pundit', '~> 1.1.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
