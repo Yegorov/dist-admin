@@ -30,6 +30,8 @@ class Task < ApplicationRecord
   # finished tasks
   scope :completed, ->{ where(state: :finished) }
 
+  scope :owned, ->(user) { where(owner: user) }
+
   state_machine :state, attribute: :state, initial: :created do
     # state :created, value: 0
     # Task.states.each do |state_name, value|

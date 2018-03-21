@@ -1,0 +1,27 @@
+h1 class="float-left" Tasks
+= link_to "Create new task", new_task_path, class: "btn btn-primary float-right"
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Name
+      th scope="col" State
+      th scope="col" Date (updated)
+      th scope="col" Actions
+  tbody
+    - @tasks.each_with_index do |task, idx|
+      - idx = (@tasks.current_page - 1) * @tasks.current_per_page + (idx + 1)
+      tr
+        td = idx
+        td = task.name
+        td = task.state
+        td = task.updated_at
+        td
+          = link_to "Open", task_path(task), class: "btn btn-success mr-2"
+          - if task.can_start?
+            = link_to "Start", start_task_path(task), method: :post, class: "btn btn-danger mr-2"
+          - if task.can_stop?
+            = link_to "Stop", stop_task_path(task), method: :post, class: "btn btn-danger mr-2"
+
+= paginate @tasks
