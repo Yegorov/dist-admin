@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def default_url_options(options={})
+  def url_options(options={})
     if current_user.present?
       options.merge(login: current_user.login)
     else
