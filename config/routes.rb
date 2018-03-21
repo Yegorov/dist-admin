@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => 'administrator', as: 'rails_admin'
   get 'errors/show404'
 
   devise_for :users, controllers: {
