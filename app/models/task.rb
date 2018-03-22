@@ -32,7 +32,7 @@ class Task < ApplicationRecord
       owner = task.owner
       script = task.script
       binding.pry
-      unless script.id == owner.id # owner.scripts.include?(script)
+      unless script.owner_id == owner.id # owner.scripts.include?(script)
         errors.add(:base, 'Script must be writing by task owner')
       end
     end
