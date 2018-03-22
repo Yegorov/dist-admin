@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :task do
+    get 'logs/index'
+  end
+
+  namespace :task do
+    get 'logs/show'
+  end
+
   mount RailsAdmin::Engine => 'administrator', as: 'rails_admin'
   get 'errors/show404'
 
@@ -44,7 +52,9 @@ Rails.application.routes.draw do
     end
 
     resources :tasks, only: [:index, :show, :new, :create] do
-      resources :logs, only: [:index, :show], controller: 'task/logs'
+      resources :logs, only: [:index, :show], controller: 'task/logs' do
+        get 'page/:page', action: :index, on: :collection # for kaminari
+      end
       post 'start', on: :member, as: :start
       post 'restart', on: :member, as: :restart
       post 'stop', on: :member, as: :stop

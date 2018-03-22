@@ -17,4 +17,8 @@
 class TaskLog < ApplicationRecord
   include TaskState
   belongs_to :task
+
+  scope :by_task, ->(task) { where(task: task) }
+
+  paginates_per 5
 end

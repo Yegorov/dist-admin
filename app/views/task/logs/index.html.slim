@@ -1,0 +1,25 @@
+.clearfix
+  h1 class="float-left"
+    | Task Logs
+  = link_to "Back to task", task_path(@task), class: "btn btn-secondary float-right"
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Task
+      th scope="col" State
+      th scope="col" Date (created)
+      th scope="col" Message
+  tbody
+    - @logs.each_with_index do |log, idx|
+      - idx = (@logs.current_page - 1) * @logs.current_per_page + (idx + 1)
+      tr
+        td = idx
+        -# or td = @task.name
+        td = log.task.name
+        td = log.state
+        td = log.created_at
+        td = link_to log.message, task_log_path(log.task, log)
+
+= paginate @logs
