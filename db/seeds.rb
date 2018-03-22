@@ -64,7 +64,11 @@ DocumentPermission.create!(document: f1, user: user1, action: Action::Write)
 
 s = nil
 50.times do |n|
-  s = admin.scripts.create!(name: "Map reduce world splitter #{n}")
+  s = admin.scripts.create!(name: "Map reduce world splitter #{n}",
+                            mapper: "def mapper:\n    return 42",
+                            reducer: "def reducer:\n    return 42",
+                            input: "admin:3",
+                            output: "")
 end
 
 # need TaskManager
