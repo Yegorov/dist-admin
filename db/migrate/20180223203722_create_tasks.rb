@@ -14,6 +14,6 @@ class CreateTasks < ActiveRecord::Migration[5.1]
     end
 
     add_foreign_key :tasks, :users, column: :owner_id
-    add_foreign_key :tasks, :scripts, column: :script_id
+    add_foreign_key :tasks, :scripts, column: :script_id, on_delete: :nullify
   end
 end
