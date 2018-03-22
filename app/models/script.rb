@@ -25,6 +25,8 @@ class Script < ApplicationRecord
   belongs_to :owner, class_name: "User"
   has_many :tasks
 
+  validates :name, :mapper, :reducer, :input, presence: true
+
   scope :owned, ->(user){ where(owner: user) }
 
   paginates_per 20

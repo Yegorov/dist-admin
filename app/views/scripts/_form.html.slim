@@ -1,4 +1,5 @@
 = form_for(script) do |f|
+  = render 'shared/error_messages', f: f
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control form-control-lg"
