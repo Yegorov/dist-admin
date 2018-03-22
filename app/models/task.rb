@@ -27,7 +27,7 @@ class Task < ApplicationRecord
   has_many :logs, class_name: 'TaskLog', dependent: :delete_all
 
   validates :name, presence: true
-  validate do |task|
+  validate on: :create do |task|
     if task.owner.present? && task.script.present?
       owner = task.owner
       script = task.script

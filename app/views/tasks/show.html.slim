@@ -1,2 +1,45 @@
-h1 Tasks#show
-p Find me in app/views/tasks/show.html.slim
+.clearfix
+  /h1 class="float-left" Task
+  h1 class="float-left"
+    | Task:&nbsp;
+    = @task.name
+  = back_to_index('tasks')
+
+h3
+  | State:&nbsp;
+  span class="badge badge-primary"
+    = @task.state
+
+- if @task.script.present?
+  h3
+    | Script:&nbsp;
+    = link_to @task.script.name, script_path(@task.script)
+
+- [:created, :started, :stopped, :finished].each do |date|
+  - if @task.read_attribute(:"#{date}_at").present?
+    h3
+      | Date&nbsp;
+      = date
+      | :&nbsp;
+      = @task.read_attribute(:"#{date}_at")
+
+- @task.running_time&.tap do |time|
+  h3
+    | Running time:&nbsp;
+    = time
+
+h3 Actions:
+.actions
+  - if @task.can_start?
+    = link_to "Start", start_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+  - if @task.can_restart?
+    = link_to "Restart", restart_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+  - if @task.can_stop?
+    = link_to "Stop", stop_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+  - if @task.finished?
+    = link_to "Actions not perfomed, because task finished", "#", class: "btn btn-danger mr-2"
+
+h3 Task logs:
+.logs
+  = link_to "View logs", task_logs_path(@task), class: "btn btn-primary"
+
