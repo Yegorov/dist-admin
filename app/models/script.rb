@@ -26,6 +26,16 @@ class Script < ApplicationRecord
   has_many :tasks, dependent: :nullify
 
   validates :name, :mapper, :reducer, :input, presence: true
+  validate do |script|
+    [:input, :output].each do |column|
+      if script.read_attribute(column).present?
+        value = script.read_attribute(column)
+        unless value =~ /[\w\d]+:\d+/
+          errors.add(column, 'must be in format "login:iid", example: "user1:3"')
+        end
+      end
+    end
+  end
 
   scope :owned, ->(user){ where(owner: user) }
 
