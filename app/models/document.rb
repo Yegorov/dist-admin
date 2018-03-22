@@ -31,10 +31,29 @@ class Document < ApplicationRecord
   has_one :encryptor, dependent: :delete
   #accepts_nested_attributes_for :encryptor, :allow_destroy => true
 
-  scope :roots, ->() { where(parent_iid: nil)}
-  scope :in_folder, ->(document) { where(parent_iid: document.iid) }
+  scope :roots, ->() { where(parent_iid: nil) }
+  scope :in_folder, ->(document) { document.nil? ? roots : where(parent_iid: document.iid) }
   scope :available, ->{ where(deleted: false, prepared: true) }
   scope :owned, ->(user){ where(owner: user) }
+
+  validates :name, presence: true
+  validate do |document|
+    parent_folder = Document.owned(document.owner)
+                            .find_by(iid: document.parent_iid) # use parent method
+    exist = Document.owned(document.owner)
+                    .where(deleted: false)
+                    .in_folder(parent_folder)
+                    .where.not(iid: document.iid)
+                    .exists?(name: document.name)
+    if exist
+      errors.add(:name, 'must be unique in folder')
+    end
+  end
+
+  def parent
+    Document.owned(self.owner)
+            .find_by(iid: self.parent_iid)
+  end
 
   def folder?
     self.type == FileEntity::Folder.to_s
@@ -51,6 +70,10 @@ class Document < ApplicationRecord
     else
       ""
     end
+  end
+  def prepared!
+    # need call when real document ready
+    self.update_column(:prepared, true)
   end
   def encrypted?
     if file?

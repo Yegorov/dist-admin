@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_document, only: [:show, :edit, :destroy]
+  before_action :find_document, only: [:show, :edit, :update, :destroy]
 
   def index
     @documents = Document.order(name: :asc)
@@ -27,6 +27,16 @@ class DocumentsController < ApplicationController
 
   def edit
     # edit name
+    # edit owner
+    @original_document = @document
+  end
+  def update
+    if @document.update(update_document_params)
+      redirect_to document_path(@document.iid)
+    else
+      @original_document = @document.clone.reload
+      render 'edit'
+    end
   end
 
   def destroy
@@ -61,5 +71,8 @@ class DocumentsController < ApplicationController
                         .find_by!(iid: params[:iid])
   rescue
     show404
+  end
+  def update_document_params
+    params.require(:document).permit(:name)
   end
 end

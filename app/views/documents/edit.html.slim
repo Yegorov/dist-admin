@@ -1,2 +1,15 @@
-h1 Documents#edit
-p Find me in app/views/documents/edit.html.slim
+h1
+  | Edit&nbsp;
+  = @original_document.type_s
+  | :&nbsp;
+  = @original_document.name
+
+= form_for(@document, as: :document,
+                      method: :patch,
+                      url: document_path(@document.iid)) do |f|
+  = render 'shared/error_messages', f: f
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control form-control-lg"
+
+  = f.submit "Save", class: "btn btn-primary"
