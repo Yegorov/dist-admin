@@ -26,6 +26,18 @@ class Task < ApplicationRecord
   belongs_to :script
   has_many :logs, class_name: 'TaskLog', dependent: :delete_all
 
+  validates :name, presence: true
+  validate do |task|
+    if task.owner.present? && task.script.present?
+      owner = task.owner
+      script = task.script
+      binding.pry
+      unless script.id == owner.id # owner.scripts.include?(script)
+        errors.add(:base, 'Script must be writing by task owner')
+      end
+    end
+  end
+
   # running (or strted) tasks
   scope :launched, ->{ where(state: :started) }
   # finished tasks

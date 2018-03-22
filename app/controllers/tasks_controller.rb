@@ -13,9 +13,18 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    load_scripts
   end
 
   def create
+    @task = Task.new(task_params)
+    @task.owner = current_user
+    if @task.save
+      redirect_to task_path(@task)
+    else
+      load_scripts
+      render 'new'
+    end
   end
 
   # def edit
@@ -47,5 +56,14 @@ class TasksController < ApplicationController
     @task = Task.owned(current_user).find(params[:id])
   rescue
     show404
+  end
+  def task_params
+    params.require(:task).permit(:name, :script_id)
+  end
+  def load_scripts
+    @scripts = Script.order(updated_at: :desc)
+                 .owned(current_user)
+                 .limit(100)
+                 .pluck(:name, :id)
   end
 end

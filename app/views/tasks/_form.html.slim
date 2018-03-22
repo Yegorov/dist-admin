@@ -1,0 +1,9 @@
+= form_for(task) do |f|
+  = render 'shared/error_messages', f: f
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control form-control-lg"
+  .form-group
+    = f.label :script
+    = f.select :script_id, options_for_select(scripts), { prompt: 'Select script' }, class: "form-control"
+  = f.submit "Create task", class: "btn btn-primary"
