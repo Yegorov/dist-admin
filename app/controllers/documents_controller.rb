@@ -34,10 +34,36 @@ class DocumentsController < ApplicationController
     @original_document = @document
   end
   def update
-    if @document.update(update_document_params)
+    error = nil
+    message = nil
+    if (@document.encrypted?.to_s != params[:encrypt]) &&
+       params[:password].present?
+       # Encrypt/Decrypt file
+       if params[:encrypt] == 'true'
+        # encrypt file with params[:password]
+        message = "The file will be encrypted"
+       elsif params[:encrypt] == 'false'
+        # decrypt file with params[:password]
+        # check password in encryptor
+        if @document.encryptor.verify_pass_phrase(params[:password])
+          # validation is ok!
+          message = "The file will be available after the decryption"
+        else
+          error = "Error password for decrypt"
+        end
+       else
+        error = "Unknown encrypt param value"
+       end
+    else
+      error = "You need set a password"
+    end
+
+    if @document.update(update_document_params) && error.blank?
+      flash[:info] = message if message
       redirect_to document_path(@document.iid)
     else
       @original_document = @document.clone.reload
+      flash.now[:danger] = error if error
       render 'edit'
     end
   end

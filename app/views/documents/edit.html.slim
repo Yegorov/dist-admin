@@ -11,5 +11,10 @@ h1
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control form-control-lg"
+  .form-group
+    = label_tag :encrypt, nil, { class: "mr-4" }
+    -# check_box_tag :encrypt, value = "1", checked = @document.encrypted?
+    = select_tag :encrypt, options_for_select([ "true", "false" ], @document.encrypted?), class: "mr-4"
+    = password_field_tag
 
   = f.submit "Save", class: "btn btn-primary"
