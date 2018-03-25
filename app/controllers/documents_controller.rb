@@ -23,6 +23,9 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    @parent_document = @document.parent
+    @owner = @document.owner
+    @creator = @document.creator
   end
 
   def edit
