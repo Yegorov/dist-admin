@@ -1,6 +1,6 @@
 class PermissionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_document, only: [:index, :index_show, :show, :edit, :update]
+  before_action :find_document, only: [:index, :index_show, :show, :new, :edit, :update]
   before_action :find_user, only: [:index_show, :edit]
   #before_action :find_permission, only: [:update, :destroy]
 
@@ -23,9 +23,13 @@ class PermissionsController < ApplicationController
   end
 
   def new
+    @permission = DocumentPermission.new
+    @users = User.available.where.not(id: current_user.id).first(100).map { |u| [u.name, u.id] }
+    @actions = Action.all.map {|action_class| [action_class.title, action_class.id] }
   end
 
   def create
+    binding.pry
   end
 
   def edit
@@ -45,7 +49,7 @@ class PermissionsController < ApplicationController
     show404
   end
   def find_user
-    @user = User.find_by!(login: params[:user_login])
+    @user = User.available.find_by!(login: params[:user_login])
   rescue
     show404
   end

@@ -57,7 +57,8 @@ class User < ApplicationRecord
   validates :login, length: { minimum: 5, maximum: 50 },
                     format: { with: /\A[a-z][a-z0-9]+\z/ }
 
-  scope :exist, -> { where(deleted: false) }
+  scope :existent, -> { where(deleted: false) }
+  scope :available, -> { existent.where(banned: false) }
 
   def active_for_authentication?
     super && !self.deleted?

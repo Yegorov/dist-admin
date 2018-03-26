@@ -1,2 +1,13 @@
-h1 Permissions#new
-p Find me in app/views/permissions/new.html.slim
+h1 Create Permission
+
+= form_for(@permission) do |f|
+  = render 'shared/error_messages', f: f
+  .form-group
+    = f.label :user
+    = f.select :user_id, options_for_select(@users), { prompt: 'Select user' }, class: "form-control"
+  .form-group
+    = f.label :action
+    = f.select :action, options_for_select(@actions), { prompt: 'Select action' }, class: "form-control"
+  -# f.hidden_field :document_iid, value: @document.iid # can found in form
+  = f.submit "Create Permission", class: "btn btn-primary"
+

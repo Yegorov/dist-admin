@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
 
   protected
   def find_user
-    @user = User.exist.find_by_login(params[:login])
+    @user = User.existent.find_by_login(params[:login])
     if @user.nil?
       show404 and return
     end
