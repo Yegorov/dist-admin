@@ -2,8 +2,9 @@ div class="container"
   div class="jumbotron"
     h1 class="display-4" Distributed Admin
     p class="lead" Administrative panel for differentiation of access rights to distributed system
-    hr class="my-4"
-    p If you are not yet with us, register now
-    p class="lead"
-      /a class="btn btn-primary btn-lg" href="#" role="button" Sign up
-      = link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg", role: "button"
+    - if current_user.blank?
+      hr class="my-4"
+      p If you are not yet with us, register now
+      p class="lead"
+        /a class="btn btn-primary btn-lg" href="#" role="button" Sign up
+        = link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg", role: "button"
