@@ -21,6 +21,9 @@ class Action
       self.descendants
     end
   end
+  def self.descendants?(klass)
+    self.descendants.include?(klass)
+  end
   def id
     self.class.id
   end

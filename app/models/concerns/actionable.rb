@@ -66,6 +66,9 @@ module Actionable
   end
 
   module ClassMethods
+    def actions
+      self.class_variable_get('@@actions')
+    end
     # def new(**kwargs)
     #   if kwargs[:action].instance_of?(Class)
     #     kwargs[:action] = kwargs[:action].new

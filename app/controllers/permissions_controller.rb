@@ -1,8 +1,9 @@
 class PermissionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_document, only: [:index, :index_show, :show, :new, :edit, :update]
+  before_action :find_document, only: [:index, :index_show, :show, :new, :create, :edit, :update]
   before_action :find_user, only: [:index_show, :edit]
   #before_action :find_permission, only: [:update, :destroy]
+  before_action :set_before_create, only: :create
 
   def index
     @permissions = DocumentPermission.document(@document)
@@ -29,7 +30,32 @@ class PermissionsController < ApplicationController
   end
 
   def create
-    binding.pry
+    @allowed_permissions = DocumentPermission.document(@document)
+                                             .user(@user)
+
+    @permission = DocumentPermission.document(@document)
+                                   .user(@user)
+                                   .action(@action)
+    if @permission.blank?
+      # check dublicates actions in tree
+      @allowed_permissions.each do |allowed_permission|
+        binding.pry
+        if @action.class.descendants?(allowed_permission.action.class)
+          allowed_permission.destroy
+        end
+      end
+      @permission = DocumentPermission.new
+      @permission.action = @action
+      @permission.user = @user
+      @permission.document = @document
+      @permission.save
+      flash[:info] = "Permission successfuly created!"
+      redirect_to index_show_document_permissions_url(@document.iid, @user.login)
+    else
+      flash[:info] = "Permission is exist, try to edit!"
+      redirect_to index_show_document_permissions_url(@document.iid, @user.login)
+    end
+
   end
 
   def edit
@@ -59,4 +85,13 @@ class PermissionsController < ApplicationController
   # rescue
   #   show404
   # end
+
+  def set_before_create
+    @action = DocumentPermission.actions[params[:document_permission][:action].to_i]
+    @user = User.available.find(params[:document_permission][:user_id])
+  end
+
+  def document_permission_params
+    params.require(:document_permission).permit(:user_id, :action)
+  end
 end
