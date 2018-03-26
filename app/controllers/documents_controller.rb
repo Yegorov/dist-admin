@@ -36,26 +36,28 @@ class DocumentsController < ApplicationController
   def update
     error = nil
     message = nil
-    if (@document.encrypted?.to_s != params[:encrypt]) &&
-       params[:password].present?
-       # Encrypt/Decrypt file
-       if params[:encrypt] == 'true'
+
+    if @document.file? && (@document.encrypted?.to_s != params[:encrypt])
+      if params[:password].present?
+        # Encrypt/Decrypt file
+        if params[:encrypt] == 'true'
         # encrypt file with params[:password]
-        message = "The file will be encrypted"
-       elsif params[:encrypt] == 'false'
-        # decrypt file with params[:password]
-        # check password in encryptor
-        if @document.encryptor.verify_pass_phrase(params[:password])
-          # validation is ok!
-          message = "The file will be available after the decryption"
+        message = "The file will be encrypted, but now it's not available!"
+        elsif params[:encrypt] == 'false'
+          # decrypt file with params[:password]
+          # check password in encryptor
+          if @document.encryptor.verify_pass_phrase(params[:password])
+            # validation is ok!
+            message = "The file will be available after the decryption!"
+          else
+            error = "Error password for decrypt!"
+          end
         else
-          error = "Error password for decrypt"
+          error = "Unknown encrypt param value!"
         end
-       else
-        error = "Unknown encrypt param value"
-       end
-    else
-      error = "You need set a password"
+      else
+        error = "You need set a password!"
+      end
     end
 
     if @document.update(update_document_params) && error.blank?
