@@ -24,4 +24,15 @@ class DocumentPermission < ApplicationRecord
 
   scope :user, ->(u) { where(user: u) }
   scope :document, ->(d) { where(document: d) }
+
+  paginates_per 5
+
+
+  def last_updated_at
+    if attributes['last_updated_at']
+      ActiveSupport::TimeZone[Time.zone.name].parse(attributes['last_updated_at'])
+    else
+      updated_at
+    end
+  end
 end

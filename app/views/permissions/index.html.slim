@@ -1,0 +1,27 @@
+.clearfix
+  h1.float-left
+    | Permissions for&nbsp;
+    = @document.type_s
+    | :&nbsp;
+    = @document.name
+  = link_to "Document property", document_path(@document.iid), class: "btn btn-secondary float-right"
+
+h3 
+  | Document owner:&nbsp;
+  = @document.owner.name
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" For user
+      th scope="col" Last updated date
+  tbody
+    - @permissions.each_with_index do |permission, idx|
+      - idx = (@permissions.current_page - 1) * @permissions.current_per_page + (idx + 1)
+      tr
+        td = idx
+        td = link_to permission.user.name, index_show_document_permissions_path(@document.iid, permission.user.login)
+        td = permission.last_updated_at.to_formatted_s(:long_ordinal)
+
+= paginate @permissions

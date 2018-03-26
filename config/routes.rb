@@ -47,7 +47,10 @@ Rails.application.routes.draw do
       get 'new-folder', action: :new_folder, on: :collection, as: :new_folder
       post 'new-folder', action: :create_folder, on: :collection
 
-      resources :permissions, shallow: true
+      resources :permissions, except: [:destroy], shallow: false do
+        get ':user_login', action: :index_show, on: :collection, as: :index_show
+        get ':user_login/edit', action: :edit, on: :collection, as: :edit
+      end
       resources :logs, only: [:index, :show], controller: 'document/logs'
     end
 

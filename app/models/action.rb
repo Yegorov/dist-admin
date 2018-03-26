@@ -11,6 +11,9 @@ class Action
   def self.id
     @id
   end
+  def self.title
+    name.demodulize
+  end
   def self.all(sub = false)
     if sub
       self.subclasses

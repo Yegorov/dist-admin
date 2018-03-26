@@ -1,0 +1,23 @@
+h1 Edit permissions
+p Find me in app/views/permissions/edit.html.slim
+
+
+.clearfix
+  h1.float-left
+    | Edit permissions for&nbsp;
+    = @document.type_s
+    | :&nbsp;
+    = @document.name
+  = link_to "Document permissions", index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary float-right mr-2"
+
+
+h3 
+  | Document owner:&nbsp;
+  = @document.owner.name
+
+h3 
+  | Permissions for:&nbsp;
+  = @user.name
+
+
+p Make tree http://jonmiles.github.io/bootstrap-treeview/

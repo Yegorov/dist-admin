@@ -80,3 +80,7 @@ table.documents td a.current, a.parent {
   display: block;
   padding:5px; 
 }
+
+.list-children {
+  padding-left: 40px !important;
+}
