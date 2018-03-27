@@ -24,6 +24,17 @@ class Action
   def self.descendants?(klass)
     self.descendants.include?(klass)
   end
+  def self.to_hash
+    res = []
+    self.subclasses.each do |action_class|
+      res << {
+        title: action_class.title,
+        id: action_class.id,
+        childrens: action_class.to_hash
+      }
+    end
+    res
+  end
   def id
     self.class.id
   end
@@ -55,6 +66,9 @@ class Action
   class Update < Write
     @id = 4
   end
+  # class EasyUpdate < Update
+  #   @id = 8
+  # end
   class Remove < Write
     @id = 5
   end

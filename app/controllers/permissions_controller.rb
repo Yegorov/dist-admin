@@ -1,7 +1,9 @@
 class PermissionsController < ApplicationController
+  include PermissionsHelper
+
   before_action :authenticate_user!
   before_action :find_document, only: [:index, :index_show, :show, :new, :create, :edit, :update]
-  before_action :find_user, only: [:index_show, :edit]
+  before_action :find_user, only: [:index_show, :edit, :update]
   #before_action :find_permission, only: [:update, :destroy]
   before_action :set_before_create, only: :create
 
@@ -39,7 +41,6 @@ class PermissionsController < ApplicationController
     if @permission.blank?
       # check dublicates actions in tree
       @allowed_permissions.each do |allowed_permission|
-        binding.pry
         if @action.class.descendants?(allowed_permission.action.class)
           allowed_permission.destroy
         end
@@ -61,9 +62,59 @@ class PermissionsController < ApplicationController
   def edit
     @permissions = DocumentPermission.document(@document)
                                      .user(@user)
+                                     .to_a
+    @actions = Action.to_hash
+
+    @permissions_for_input = @permissions.map { |p| p.action.id }.join(',')
+    @action_tree_json = get_action_tree(@actions, @permissions).to_json
+
   end
 
   def update
+    @actions = params[:permission_actions]
+                .split(',')
+                .map { |a| DocumentPermission.actions[a.to_i] }
+                .compact
+
+    @permissions = DocumentPermission.document(@document)
+                                     .user(@user)
+                                     .to_a
+    @exists_actions = @permissions.map { |a| a.action }
+
+    deletes = @exists_actions - @actions
+    adds = @actions - @exists_actions
+
+    # Deletes
+    deletes.each do |action_for_delete|
+      @permissions.select { |p| p.action.id == action_for_delete.id }.each do |p|
+        p.destroy
+      end
+      @exists_actions.delete(action_for_delete)
+    end
+
+    adds_paths = []
+    adds.each do |action_for_add|
+    # path to root
+    ancestors = action_for_add.class
+                              .ancestors
+                              .take_while { |klass| klass != Action }
+                              .map { |klass| klass.new }
+      adds_paths << ancestors
+    end
+    adds_paths.sort_by { |arr| arr.count }
+
+    # Adds
+    adds_paths.each do |ancestors|
+      # intersect array
+      if (ancestors & @exists_actions).blank?
+        DocumentPermission.create(document: @document,
+                                  user: @user,
+                                  action: ancestors.first)
+        @exists_actions << ancestors.first
+      end
+    end
+
+    redirect_to request.referrer
   end
 
   private

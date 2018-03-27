@@ -7,14 +7,15 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import Rails from 'rails-ujs';
+//import Rails from 'rails-ujs';
 import Turbolinks from 'turbolinks';
 
 import "./application.css";
 import 'bootstrap/dist/css/bootstrap'
 import 'selectize/dist/css/selectize'
 
-import * as $ from 'jquery'
+//import * as $ from 'jquery'
+
 import 'selectize'
 //import 'popper'
 import 'bootstrap'
@@ -26,6 +27,10 @@ import 'brace/mode/golang'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 
+// import 'webpack-bootstrap-treeview/src/css/bootstrap-treeview'
+// import 'webpack-bootstrap-treeview/src/js/bootstrap-treeview'
+import 'gijgo'
+import 'gijgo/combined/css/gijgo.css'
 
 $(document).on('turbolinks:load', function() {
   $('#input-tags').selectize({
@@ -41,6 +46,7 @@ $(document).on('turbolinks:load', function() {
 
   initAce();
 
+  /*
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   editor.session.setMode("ace/mode/python");
@@ -48,10 +54,33 @@ $(document).on('turbolinks:load', function() {
   editor.session.setTabSize(4);
   //editor.session.setUseSoftTabs(false);
   //editor.session.setOptions({ tabSize: 2, useSoftTabs: true });
+  */
 
+  // var $permission_tree = $('#permission-tree');
+  // if ($permission_tree.length) {
+  //   $permission_tree.treeview({
+  //     data: $permission_tree.data('actions'),
+  //     multiSelect: true
+  //   });
+  // }
+  var $permission_tree = $('#permission-tree');
+  if ($permission_tree.length) {
+    var tree = $permission_tree.tree({
+      primaryKey: 'id',
+      uiLibrary: 'bootstrap4',
+      dataSource: $permission_tree.data('actions'),
+      checkboxes: true
+    });
+    tree.expandAll();
+    $('#permission-tree-form').on("submit", function(e) {
+      e.preventDefault();
+      $('#permission_actions').val(tree.getCheckedNodes());
+      this.submit();
+    })
+  }
 });
 
-Rails.start();
+//Rails.start();
 Turbolinks.start();
 
 function initAce() {

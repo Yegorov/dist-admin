@@ -1,7 +1,3 @@
-h1 Edit permissions
-p Find me in app/views/permissions/edit.html.slim
-
-
 .clearfix
   h1.float-left
     | Edit permissions for&nbsp;
@@ -20,4 +16,8 @@ h3
   = @user.name
 
 
-p Make tree http://jonmiles.github.io/bootstrap-treeview/
+#permission-tree [data-actions = @action_tree_json]
+
+= form_tag update_document_permissions_path(@document.iid, @user.login), method: :patch, id: 'permission-tree-form' do
+  = hidden_field_tag 'permission_actions', @permissions_for_input, id: 'permission_actions'
+  = submit_tag 'Save', class: "btn btn-primary"
