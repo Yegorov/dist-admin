@@ -66,9 +66,6 @@ class Action
   class Update < Write
     @id = 4
   end
-  # class EasyUpdate < Update
-  #   @id = 8
-  # end
   class Remove < Write
     @id = 5
   end

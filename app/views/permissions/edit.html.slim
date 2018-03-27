@@ -20,4 +20,5 @@ h3
 
 = form_tag update_document_permissions_path(@document.iid, @user.login), method: :patch, id: 'permission-tree-form' do
   = hidden_field_tag 'permission_actions', @permissions_for_input, id: 'permission_actions'
-  = submit_tag 'Save', class: "btn btn-primary"
+  = submit_tag 'Save', class: "btn btn-primary mr-2"
+  = link_to "Cancel", index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary mr-2"

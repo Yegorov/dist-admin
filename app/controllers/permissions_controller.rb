@@ -92,6 +92,7 @@ class PermissionsController < ApplicationController
       @exists_actions.delete(action_for_delete)
     end
 
+
     adds_paths = []
     adds.each do |action_for_add|
     # path to root
@@ -101,7 +102,8 @@ class PermissionsController < ApplicationController
                               .map { |klass| klass.new }
       adds_paths << ancestors
     end
-    adds_paths.sort_by { |arr| arr.count }
+    adds_paths.sort_by! { |arr| arr.count }
+
 
     # Adds
     adds_paths.each do |ancestors|
@@ -110,9 +112,10 @@ class PermissionsController < ApplicationController
         DocumentPermission.create(document: @document,
                                   user: @user,
                                   action: ancestors.first)
-        @exists_actions << ancestors.first
+        #@exists_actions << ancestors.first
       end
     end
+
 
     redirect_to request.referrer
   end
