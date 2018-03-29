@@ -2,9 +2,23 @@ ru:
   tasks:
     show:
       task: "Задача"
+      tasks: "Задачи"
       state: "Состояние"
       states:
         created: Создана
         started: Запущена
         stopped: Остановлена
         finished: Завершена
+      script: "Скрипт"
+      date_created: "Дата создания"
+      date_started: "Дата запуска"
+      date_stopped: "Дата остановки"
+      date_finished: "Дата завершения"
+      running_time: "Время работы"
+      actions: "Действия"
+      start: "Запустить"
+      restart: "Перезапустить"
+      stop: "Остановить"
+      actions_not_perfomed: "Нет доступный действий для выполнения, так как задача завершена"
+      task_logs: "Логи задачи"
+      view_logs: "Просмотреть логи"

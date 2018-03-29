@@ -34,4 +34,18 @@ en:
   tasks:
     show:
       task: "Task"
+      tasks: "Tasks"
       state: "State"
+      script: "Script"
+      date_created: "Date created"
+      date_started: "Date started"
+      date_stopped: "Date stopped"
+      date_finished: "Date finished"
+      running_time: "Running time"
+      actions: "Actions"
+      start: "Start"
+      restart: "Restart"
+      stop: "Stop"
+      actions_not_perfomed: "Actions not perfomed, because task finished"
+      task_logs: "Task logs"
+      view_logs: "View logs"
