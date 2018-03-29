@@ -1,0 +1,10 @@
+ru:
+  tasks:
+    show:
+      task: "Задача"
+      state: "Состояние"
+      states:
+        created: Создана
+        started: Запущена
+        stopped: Остановлена
+        finished: Завершена

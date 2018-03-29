@@ -44,6 +44,9 @@ gem 'state_machines-activerecord', '~> 0.5.0'
 gem 'rails_admin', '~> 1.3'
 gem 'pundit', '~> 1.1.0'
 
+gem 'rack-contrib', '~> 2.0.1'
+
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   include ApplicationHelper
+  before_action :set_locale
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -21,4 +22,15 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     profile_path(resource)
   end
+  def set_locale
+    # Locale sets in rack middleware
+    #I18n.locale = :ru
+    if params[:locale].present?
+      locale = params[:locale].to_sym
+      if I18n.available_locales.include?(locale)
+        I18n.locale = locale
+      end
+    end
+  end
+
 end

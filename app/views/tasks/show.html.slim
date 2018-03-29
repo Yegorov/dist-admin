@@ -1,12 +1,14 @@
 .clearfix
   /h1 class="float-left" Task
   h1 class="float-left"
-    | Task:&nbsp;
+    = t('.task')
+    |:&nbsp;
     = @task.name
   = back_to_index('tasks')
 
 h3
-  | State:&nbsp;
+  = t('.state')
+  | :&nbsp;
   - state_line(Task.states.keys, @task.state)
 
 - if @task.script.present?
