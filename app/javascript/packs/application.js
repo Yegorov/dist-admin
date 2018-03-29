@@ -78,6 +78,22 @@ $(document).on('turbolinks:load', function() {
       this.submit();
     })
   }
+
+  var $set_lang = $('#set_locale_form #locale');
+  if ($set_lang.length) {
+    $set_lang.on('change', function(e) {
+      //console.log($(this).closest('form'));
+      var $form = $(this).closest('form');
+      $.ajax({
+        type: $form[0].method,
+        url: $form[0].action,
+        data: $form.serialize(),
+        success: function(data) {
+          window.location.reload();
+        }
+      });
+    });
+  }
 });
 
 //Rails.start();

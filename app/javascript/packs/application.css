@@ -95,3 +95,7 @@ table.documents td a.current, a.parent {
 .glyphicon-plus:before {
   content: "\002b";
 }
+
+.locale-container {
+  margin-top: 10px;
+}

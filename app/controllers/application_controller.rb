@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
   def set_locale
     # Locale sets in rack middleware
     #I18n.locale = :ru
+    if session[:locale].present?
+      if I18n.available_locales.include?(session[:locale].to_sym)
+        I18n.locale = session[:locale].to_sym
+      end
+    end
+
     if params[:locale].present?
       locale = params[:locale].to_sym
       if I18n.available_locales.include?(locale)

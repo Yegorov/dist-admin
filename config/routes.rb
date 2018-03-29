@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'about', to: "home#about", as: :about
   get 'help', to: "home#help", as: :help
 
+  post 'set-lang', to: 'home#set_lang', as: :set_lang
   #get ':login', to: "profiles#show", as: :profile
   #get ':login/settings', to: "profiles#edit", as: :profile_settings
 
