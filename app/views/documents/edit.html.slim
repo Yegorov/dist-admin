@@ -19,7 +19,8 @@ h1
       = label_tag :encrypt, nil, { class: "mr-4" }
       -# check_box_tag :encrypt, value = "1", checked = @document.encrypted?
       = select_tag :encrypt, options_for_select([ "true", "false" ], @document.encrypted?), class: "mr-4"
-      = password_field_tag
+      = password_field_tag :password, nil, class: "mr-4", placeholder: "Enter password"
+      = select_tag :cipher, options_for_select(Encryptor::CIPHERS, @document.encrypted? ? @document.encryptor.cipher : Encryptor::CIPHERS.first), class: "mr-4"
 
   = f.submit "Save", class: "btn btn-primary mr-2"
   = link_to "Cancel", document_path(@document), class: "btn btn-secondary"
