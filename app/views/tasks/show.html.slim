@@ -7,8 +7,7 @@
 
 h3
   | State:&nbsp;
-  span class="badge badge-primary"
-    = @task.state
+  - state_line(Task.states.keys, @task.state)
 
 - if @task.script.present?
   h3
