@@ -1,0 +1,2 @@
+module Document::LogsHelper
+end

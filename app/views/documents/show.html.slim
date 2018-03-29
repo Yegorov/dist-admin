@@ -40,4 +40,6 @@ table class="table" cellpadding="0" cellspacing="0"
       td = @document.updated_at.to_formatted_s(:long_ordinal)
 
 = link_to "Edit", edit_document_path(@document.iid), class: "btn btn-warning mr-2"
+= link_to "Remove", document_path(@document.iid), method: :delete, class: "btn btn-danger mr-2"
 = link_to "Permissions", document_permissions_path(@document.iid), class: "btn btn-primary mr-2"
+= link_to "View logs", document_logs_path(@document.iid), class: "btn btn-primary mr-2"

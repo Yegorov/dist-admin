@@ -1,0 +1,11 @@
+h1 Document::Logs#show
+p Find me in app/views/document/logs/show.html.slim
+
+.clearfix
+  h1 class="float-left"
+    | Log Message
+  = link_to "Back to document logs", document_logs_path(@log.document), class: "btn btn-secondary float-right"
+.message
+  = @log.message
+.created_at
+  = @log.created_at

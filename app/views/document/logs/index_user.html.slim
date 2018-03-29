@@ -1,0 +1,34 @@
+h1 Document::Logs#index_user
+p Find me in app/views/document/logs/index_user.html.slim
+
+.clearfix
+  h1 class="float-left"
+    | Document Logs
+  = link_to "Back to logs", document_logs_path(@document), class: "btn btn-secondary float-right"
+
+h2
+  | Logs for document:&nbsp;
+  = link_to @document.name, document_path(@document.iid)
+
+h2
+  | User:&nbsp;
+  = @user.name
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Action
+      th scope="col" Date (created)
+      th scope="col" Message
+  tbody
+    - @logs.each_with_index do |log, idx|
+      - idx = (@logs.current_page - 1) * @logs.current_per_page + (idx + 1)
+      tr
+        td = idx
+        td = log.action.title
+        td = log.created_at
+        td = link_to log.message, show_log_documents_path(log)
+
+= paginate @logs
+

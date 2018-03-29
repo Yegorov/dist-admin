@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :task do
-    get 'logs/index'
-  end
-
-  namespace :task do
-    get 'logs/show'
-  end
-
   mount RailsAdmin::Engine => 'administrator', as: 'rails_admin'
   get 'errors/show404'
 
@@ -53,7 +44,15 @@ Rails.application.routes.draw do
         get ':user_login/edit', action: :edit, on: :collection, as: :edit
         patch ':user_login', action: :update, on: :collection, as: :update
       end
-      resources :logs, only: [:index, :show], controller: 'document/logs'
+
+      resources :logs, only: [:index], controller: 'document/logs' do
+        get ':user_login', action: :index_user, on: :collection, as: :index_user
+        get 'page/:page', action: :index, on: :collection # for kaminari
+        get ':user_login/page/:page', action: :index_user, on: :collection # for kaminari
+      end
+      get 'logs', action: :index_all, controller: 'document/logs', on: :collection, as: :index_all_logs
+      get 'page/:page', action: :index_all, controller: 'document/logs', on: :collection # for kaminari
+      get 'logs/:id', action: :show, controller: 'document/logs', on: :collection, as: :show_log
     end
 
     resources :tasks, only: [:index, :show, :new, :create] do

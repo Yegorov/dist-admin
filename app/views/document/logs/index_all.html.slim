@@ -1,0 +1,30 @@
+h1 Document::Logs#index_all
+p Find me in app/views/document/logs/index_all.html.slim
+
+.clearfix
+  h1 class="float-left"
+    | Documents Logs
+  = link_to "Back to documents", documents_path, class: "btn btn-secondary float-right"
+
+
+table class="table"
+  thead
+    tr
+      th scope="col" #
+      th scope="col" Document
+      th scope="col" User
+      th scope="col" Action
+      th scope="col" Date (created)
+      th scope="col" Message
+  tbody
+    - @logs.each_with_index do |log, idx|
+      - idx = (@logs.current_page - 1) * @logs.current_per_page + (idx + 1)
+      tr
+        td = idx
+        td = link_to log.document.name, document_logs_path(log.document.iid)
+        td = link_to log.user.name, index_user_document_logs_path(log.document.iid, log.user.login)
+        td = log.action.title
+        td = log.created_at
+        td = link_to log.message, show_log_documents_path(log)
+
+= paginate @logs

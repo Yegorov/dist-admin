@@ -1,5 +1,6 @@
 .clearfix
   h1 class="float-left" Documents
+  = link_to "View logs", index_all_logs_documents_path, class: "btn btn-primary float-right mr-2"
   = link_to "Create folder", new_folder_documents_path(to: @to), class: "btn btn-success float-right mr-2"
   = link_to "Upload file", new_file_documents_path(to: @to), class: "btn btn-success float-right mr-2"
 
