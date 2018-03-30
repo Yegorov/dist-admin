@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     user = User.find_by(email: params.dig(:user, :email))
-    if user.banned?
+    if user.try(:banned?)
       redirect_to root_path, alert: "Sorry, but are you banned!"
     else
       super
