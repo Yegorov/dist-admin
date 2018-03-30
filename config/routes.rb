@@ -33,11 +33,11 @@ Rails.application.routes.draw do
       get 'folder/:folder', action: :index, on: :collection, as: :folder
       get 'folder/:folder/page/:page', action: :index, on: :collection # for kaminari
 
-      get 'new-file', action: :new_file, on: :collection, as: :new_file
-      post 'new-file', action: :create_file, on: :collection
+      get 'new/file', action: :new_file, on: :collection, as: :new_file
+      post 'new/file', action: :create_file, on: :collection
 
-      get 'new-folder', action: :new_folder, on: :collection, as: :new_folder
-      post 'new-folder', action: :create_folder, on: :collection
+      get 'new/folder', action: :new_folder, on: :collection, as: :new_folder
+      post 'new/folder', action: :create_folder, on: :collection
 
       resources :permissions, except: [:new, :edit, :update, :destroy] do
         get 'new', action: :new, on: :collection, as: :new

@@ -93,6 +93,30 @@ class DocumentsController < ApplicationController
     # show form for create folder
   end
   def create_folder
+    to = params[:to].presence || 'root'
+    parent = to == 'root' ? nil : Document.owned(current_user)
+                                          .available
+                                          .find_by(iid: to)
+    if params[:folder_name].present?
+      @document = FileEntity::Folder.mk_dir(name: params[:folder_name],
+                                            real_path: "/",
+                                            user: current_user,
+                                            parent: parent)
+      @document.prepared = true
+      if @document.save
+        flash[:success] = "Folder created successfull."
+        redirect_to document_path(@document.iid)
+      else
+        flash.now[:error] = @document.errors.full_messages.join('. ')
+        render 'new_folder'
+      end
+    else
+      raise "Folder name not present!"
+    end
+  rescue Exception => e
+    #binding.pry
+    flash.now[:error] = "Error, try again!"
+    render 'new_folder'
   end
 
   private

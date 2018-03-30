@@ -1,0 +1,8 @@
+h1 Create folder
+
+= form_tag new_folder_documents_path, method: :post do
+  .form-group
+    = label_tag 'folder_name', 'Folder name'
+    = text_field_tag 'folder_name', '', class: "form-control form-control-lg"
+  = hidden_field_tag 'to', params[:to].presence || 'root'
+  = submit_tag "Create folder", class: "btn btn-primary mr-2"
