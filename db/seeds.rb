@@ -24,6 +24,14 @@ user1 = User.create!(name: "User 1", login: "user1", email: "user1@example.com",
                      password: "1234567")
 user1.confirm
 
+user2 = User.create!(name: "User 2", login: "user2", email: "user2@example.com",
+                     password: "1234567")
+user2.confirm
+
+user3 = User.create!(name: "User 3", login: "user3", email: "user3@example.com",
+                     password: "1234567")
+user3.confirm
+
 # Create Files and Folders
 # need FileManager
 f = FileEntity::File.mk_file(name: "My file",
@@ -89,4 +97,38 @@ end
                                 parent: ff)
   ff1.prepared = true
   ff1.save
+end
+
+
+# Create document actions logs
+
+5.times do |n|
+  DocumentActionLog.create!(user: user1,
+                            document: f,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user2,
+                            document: f,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user3,
+                            document: f,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user1,
+                            document: f1,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user2,
+                            document: f1,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user2,
+                            document: f2,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
+  DocumentActionLog.create!(user: user3,
+                            document: f2,
+                            action: Action.all.sample,
+                            message: "Test message #{n}")
 end
