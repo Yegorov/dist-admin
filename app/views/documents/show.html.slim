@@ -23,15 +23,16 @@ table class="table" cellpadding="0" cellspacing="0"
     tr
       td Type
       td = @document.type_s
-    tr
-      td Size
-      td = @document.size
-    tr
-      td MD5 checksum
-      td = @document.hash_sum
-    tr
-      td Is encrypt
-      td = @document.encrypted?
+    - if @document.file?
+      tr
+        td Size
+        td = @document.size
+      tr
+        td MD5 checksum
+        td = @document.hash_sum
+      tr
+        td Is encrypt
+        td = @document.encrypted?
     tr
       td Created date
       td = @document.created_at.to_formatted_s(:long_ordinal)
