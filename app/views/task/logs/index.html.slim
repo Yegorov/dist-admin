@@ -19,7 +19,7 @@ table class="table"
         -# or td = @task.name
         td = log.task.name
         td = log.state
-        td = log.created_at
+        td = log.created_at.to_formatted_s(:long_ordinal)
         td = link_to log.message, task_log_path(log.task, log)
 
 = paginate @logs

@@ -22,7 +22,7 @@ table class="table"
         td = idx
         td = link_to log.user.name, index_user_document_logs_path(log.document.iid, log.user.login)
         td = log.action.title
-        td = log.created_at
+        td = log.created_at.to_formatted_s(:long_ordinal)
         td = link_to log.message, show_log_documents_path(log)
 
 = paginate @logs

@@ -21,7 +21,7 @@ h3
     h3
       = t(".date_#{date}")
       | :&nbsp;
-      = @task.read_attribute(:"#{date}_at")
+      = @task.read_attribute(:"#{date}_at").to_formatted_s(:long_ordinal)
 
 - @task.running_time&.tap do |time|
   h3

@@ -16,7 +16,7 @@ table class="table"
         td = idx
         td = task.name
         td = task.state
-        td = task.updated_at
+        td = task.updated_at.to_formatted_s(:long_ordinal)
         td
           = link_to "Open", task_path(task), class: "btn btn-success mr-2"
           - if task.prepared

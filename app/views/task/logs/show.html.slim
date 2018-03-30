@@ -5,4 +5,4 @@
 .message
   = @log.message
 .created_at
-  = @log.created_at
+  = @log.created_at.to_formatted_s(:long_ordinal)
