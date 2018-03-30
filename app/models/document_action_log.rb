@@ -24,4 +24,6 @@ class DocumentActionLog < ApplicationRecord
 
   scope :user, ->(u) { where(user: u) }
   scope :document, ->(d) { where(document: d) }
+
+  paginates_per 5
 end
