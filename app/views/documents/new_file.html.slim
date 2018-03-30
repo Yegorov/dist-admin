@@ -1,0 +1,12 @@
+h1 Upload file
+
+.upload_file_form
+  .form-group
+    = label_tag 'folder_name', 'Choose file'
+    = file_field_tag 'upload_file', class: "form-control form-control-lg"
+  .m-2.p-2
+    div class="progress" id="upload_file_progressbar"
+      div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"
+  = hidden_field_tag 'to', params[:to].presence || 'root'
+  = button_tag "Upload", type: 'button', id: 'upload_file_button', class: "btn btn-primary mr-2"
+
