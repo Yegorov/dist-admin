@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
     redirect_to request.referrer || "/"
   end
 
+  def set_lang
+    if I18n.available_locales.include?(params[:locale].to_sym)
+      session[:locale] = params[:locale].to_sym
+      I18n.locale = session[:locale].to_sym
+    end
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :login])
@@ -37,6 +44,8 @@ class ApplicationController < ActionController::Base
         I18n.locale = locale
       end
     end
+
+    logger.warn "Locale: #{I18n.locale}"
   end
 
 end

@@ -10,8 +10,4 @@ class HomeController < ApplicationController
   end
   def help
   end
-
-  def set_lang
-    session[:locale] = params[:locale] || I18n.locale
-  end
 end

@@ -9,7 +9,7 @@ ruby '2.4.1'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # Gems that use the application
 gem 'webpacker', '~> 3.2'
 gem 'slim-rails', '~> 3.1.2'
-gem 'devise', '~> 4.4.1'
+gem 'devise', '~> 4.4.3'
 gem 'kaminari', '~> 1.1.1'
 gem 'state_machines-activerecord', '~> 0.5.0'
 gem 'rails_admin', '~> 1.3'
