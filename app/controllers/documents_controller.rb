@@ -91,6 +91,12 @@ class DocumentsController < ApplicationController
 
   def create_file
     #binding.pry
+    # check params and return status 400
+
+    File.open "/tmp/#{params[:unique_id]}", "ab" do |f|
+      f.write(params[:file].read)
+    end
+
     render plain: "", status: 200
   end
 
