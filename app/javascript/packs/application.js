@@ -32,6 +32,8 @@ import 'brace/theme/monokai'
 import 'gijgo'
 import 'gijgo/combined/css/gijgo.css'
 
+import './upload'
+
 $(document).on('turbolinks:load', function() {
   $('#input-tags').selectize({
       delimiter: ',',

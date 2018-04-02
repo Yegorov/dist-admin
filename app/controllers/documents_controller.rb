@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class DocumentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_document, only: [:show, :edit, :update, :destroy]
@@ -84,9 +86,12 @@ class DocumentsController < ApplicationController
   def new_file
     # show form for upload file
     # params[:to]
+    @unique_id = [current_user.login, SecureRandom.hex(20), Time.now.to_i.to_s].join("_")
   end
 
   def create_file
+    #binding.pry
+    render plain: "", status: 200
   end
 
   def new_folder
