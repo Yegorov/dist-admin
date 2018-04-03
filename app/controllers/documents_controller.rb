@@ -92,12 +92,49 @@ class DocumentsController < ApplicationController
   def create_file
     #binding.pry
     # check params and return status 400
-
-    File.open "/tmp/#{params[:unique_id]}", "ab" do |f|
-      f.write(params[:file].read)
+    if params[:start].blank? || params[:end].blank?
+       params[:size].blank? || params[:unique_id].blank?
+       params[:file].blank?
+       render plain: "", status: 400 and return
     end
 
-    render plain: "", status: 200
+    _unique_id = params[:unique_id]
+    _start = params[:start].to_i
+    _end = params[:end].to_i
+    _size = params[:size].to_i
+
+    @upload_file = UploadFile.find_by(unique_id: _unique_id)
+
+    if @upload_file.nil? && _start == 0
+      @upload_file = UploadFile.create! do |uf|
+        uf.file_name = params[:file_name] || "file"
+        uf.size = _size
+        uf.current_size = _start
+        uf.unique_id = _unique_id
+        uf.path = "/tmp/#{_unique_id}"
+        uf.user = current_user
+        uf.to = params[:to] || "root"
+      end
+    end
+
+    if @upload_file.present?
+      if @upload_file.current_size != _start
+        render plain: "", status: 400 and return
+      end
+
+      File.open @upload_file.path, "ab" do |f|
+        f.write(params[:file].read)
+      end
+
+      @upload_file.current_size = _end
+      @upload_file.save!
+
+      render plain: "", status: 200 and return
+    end
+
+    render plain: "", status: 400
+  rescue
+    render plain: "", status: 400
   end
 
   def new_folder
