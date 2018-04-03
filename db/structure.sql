@@ -25,6 +25,9 @@ CREATE TABLE "scripts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" 
 CREATE INDEX "index_scripts_on_owner_id" ON "scripts" ("owner_id");
 CREATE TABLE "encryptors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "document_id" integer, "cipher" varchar, "pass_phrase_hash" varchar, "pass_phrase_salt" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_encryptors_on_document_id" ON "encryptors" ("document_id");
+CREATE TABLE "upload_files" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "file_name" varchar DEFAULT 'file' NOT NULL, "size" integer DEFAULT 0 NOT NULL, "current_size" integer DEFAULT 0 NOT NULL, "path" varchar NOT NULL, "user_id" integer, "unique_id" varchar NOT NULL, "to" varchar DEFAULT 'root' NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE INDEX "index_upload_files_on_user_id" ON "upload_files" ("user_id");
+CREATE UNIQUE INDEX "index_upload_files_on_unique_id" ON "upload_files" ("unique_id");
 INSERT INTO "schema_migrations" (version) VALUES
 ('20180222113745'),
 ('20180222114505'),
@@ -34,6 +37,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180223203722'),
 ('20180223204300'),
 ('20180223205658'),
-('20180321085307');
+('20180321085307'),
+('20180403111538');
 
 
