@@ -1,8 +1,0 @@
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: distadmin_development
-  pool: 5
-  username: user
-  password: user
-  host: 'localhost'
