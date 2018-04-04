@@ -92,8 +92,11 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_controller.default_url_options = { host: 'distadmin.donetsk.space' }
-  config.action_mailer.default_url_options = { host: 'distadmin.donetsk.space' }
+  # if uncomment add param to url, example: /about?login=user1
+  #config.action_controller.default_url_options = { host: 'distadmin.donetsk.space' }
 
-  config.action_mailer.perform_deliveries = :test
+  #config.action_mailer.default_url_options = { host: 'distadmin.donetsk.space' }
+
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = false
 end
