@@ -13,6 +13,10 @@
 #
 #  index_task_logs_on_task_id  (task_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (task_id => tasks.id)
+#
 
 class TaskLog < ApplicationRecord
   include TaskState

@@ -22,6 +22,11 @@
 #  index_documents_on_creator_id  (creator_id)
 #  index_documents_on_owner_id    (owner_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (creator_id => users.id)
+#  fk_rails_...  (owner_id => users.id)
+#
 
 module FileEntity
   class File < Document

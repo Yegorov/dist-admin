@@ -14,5 +14,7 @@ class CreateScripts < ActiveRecord::Migration[5.1]
     end
 
     add_foreign_key :scripts, :users, column: :owner_id
+
+    add_foreign_key :tasks, :scripts, column: :script_id, on_delete: :nullify
   end
 end

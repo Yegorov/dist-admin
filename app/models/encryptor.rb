@@ -14,6 +14,10 @@
 #
 #  index_encryptors_on_document_id  (document_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (document_id => documents.id)
+#
 
 require 'digest'
 

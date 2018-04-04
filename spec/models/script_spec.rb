@@ -18,6 +18,10 @@
 #
 #  index_scripts_on_owner_id  (owner_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (owner_id => users.id)
+#
 
 require 'rails_helper'
 

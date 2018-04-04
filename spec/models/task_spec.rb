@@ -19,6 +19,11 @@
 #  index_tasks_on_owner_id   (owner_id)
 #  index_tasks_on_script_id  (script_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (owner_id => users.id)
+#  fk_rails_...  (script_id => scripts.id) ON DELETE => nullify
+#
 
 require 'rails_helper'
 

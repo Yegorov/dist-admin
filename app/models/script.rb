@@ -18,6 +18,10 @@
 #
 #  index_scripts_on_owner_id  (owner_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (owner_id => users.id)
+#
 
 class Script < ApplicationRecord
   enum language: { python: 1, ruby: 2, go: 3, javascript: 4 }
