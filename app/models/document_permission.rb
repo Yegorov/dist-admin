@@ -35,7 +35,7 @@ class DocumentPermission < ApplicationRecord
 
   def last_updated_at
     if attributes['last_updated_at']
-      ActiveSupport::TimeZone[Time.zone.name].parse(attributes['last_updated_at'])
+      ActiveSupport::TimeZone[Time.zone.name].parse(attributes['last_updated_at'].to_s)
     else
       updated_at
     end

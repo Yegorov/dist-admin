@@ -9,8 +9,8 @@ class PermissionsController < ApplicationController
 
   def index
     @permissions = DocumentPermission.document(@document)
-                                     .select("document_permissions.*, \
-                                             MAX(updated_at) as last_updated_at")
+                                     .select("user_id, \
+                                              MAX(updated_at) as last_updated_at")
                                      .order(user_id: :asc)
                                      .group(:user_id)
                                      .page(params[:page])
