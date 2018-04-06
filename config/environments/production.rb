@@ -97,6 +97,18 @@ Rails.application.configure do
 
   #config.action_mailer.default_url_options = { host: 'distadmin.donetsk.space' }
 
-  config.action_mailer.perform_deliveries = false
-  config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.perform_deliveries = false
+  #config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :port           => 587,
+    :address        => "smtp.sendgrid.net",
+    :domain         => "distadmin.donetsk.space",
+    :user_name      => Rails.application.secrets[:email_user],
+    :password       => Rails.application.secrets[:email_password],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.default_url_options = { host: 'distadmin.donetsk.space' }
 end
