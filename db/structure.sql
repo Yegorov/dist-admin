@@ -687,7 +687,7 @@ ALTER TABLE ONLY document_permissions
 --
 
 ALTER TABLE ONLY document_permissions
-    ADD CONSTRAINT fk_rails_219008edb6 FOREIGN KEY (document_id) REFERENCES users(id);
+    ADD CONSTRAINT fk_rails_219008edb6 FOREIGN KEY (document_id) REFERENCES documents(id);
 
 
 --

@@ -9,7 +9,7 @@ class CreateDocumentPermissions < ActiveRecord::Migration[5.1]
     end
 
     add_foreign_key :document_permissions, :users, column: :user_id
-    add_foreign_key :document_permissions, :users, column: :document_id
+    add_foreign_key :document_permissions, :documents, column: :document_id
 
     add_index :document_permissions, [:user_id, :document_id, :action],
               unique: true, name: "idx_user_document_action"
