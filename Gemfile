@@ -48,7 +48,7 @@ gem 'rails_admin', '~> 1.3'
 gem 'pundit', '~> 1.1.0'
 
 gem 'rack-contrib', '~> 2.0.1'
-
+gem "bugsnag", "~> 6.7"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
