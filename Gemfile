@@ -50,6 +50,10 @@ gem 'pundit', '~> 1.1.0'
 gem 'rack-contrib', '~> 2.0.1'
 gem "bugsnag", "~> 6.7"
 
+gem 'daemons'
+gem 'delayed_job', "~> 4.1.4"
+gem 'delayed_job_active_record', "~> 4.1.2"
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -78,6 +82,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
   gem 'capistrano-nvm',     require: false
+  gem 'capistrano3-delayed-job', '~> 1.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

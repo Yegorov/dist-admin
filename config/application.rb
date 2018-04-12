@@ -21,5 +21,7 @@ module DistAdmin
 
     #config.middleware.use Rack::Locale
     config.middleware.use Rack::TempfileReaper
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

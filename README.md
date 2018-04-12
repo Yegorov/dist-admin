@@ -7,6 +7,7 @@ Administrative panel for differentiation of access rights to distributed system
 
 * Ruby 2.4.1 (2.5.0)
 * Stable NodeJS
+* OpenSSL 1.0.2
 
 ## How run app
 
@@ -19,6 +20,7 @@ $ yarn install
 $ bin/rails db:create db:migrate 
 $ bin/rails db:seed ADMIN_PASSWORD=YOU_SECRET_PASS ADMIN_EMAIL=youemail@example.com # Init DB
 $ bin/rails s
+$ bin/delayed_job start
 # Go to browser and open http://localhost:3000
 ```
 

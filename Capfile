@@ -38,6 +38,9 @@ require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/nvm'
 
+require 'capistrano/delayed_job'
+
+
 
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
