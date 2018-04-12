@@ -19,7 +19,7 @@ module DistAdmin
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:en, :ru]
 
-    config.middleware.use Rack::Locale
+    #config.middleware.use Rack::Locale
     config.middleware.use Rack::TempfileReaper
   end
 end
