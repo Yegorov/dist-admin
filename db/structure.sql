@@ -221,6 +221,39 @@ ALTER SEQUENCE encryptors_id_seq OWNED BY encryptors.id;
 
 
 --
+-- Name: logs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE logs (
+    id bigint NOT NULL,
+    message text DEFAULT ''::text,
+    status character varying DEFAULT 'info'::character varying NOT NULL,
+    subject character varying DEFAULT 'unknown'::character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE logs_id_seq OWNED BY logs.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -465,6 +498,13 @@ ALTER TABLE ONLY encryptors ALTER COLUMN id SET DEFAULT nextval('encryptors_id_s
 
 
 --
+-- Name: logs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY logs ALTER COLUMN id SET DEFAULT nextval('logs_id_seq'::regclass);
+
+
+--
 -- Name: scripts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -545,6 +585,14 @@ ALTER TABLE ONLY documents
 
 ALTER TABLE ONLY encryptors
     ADD CONSTRAINT encryptors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: logs logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY logs
+    ADD CONSTRAINT logs_pkey PRIMARY KEY (id);
 
 
 --
@@ -832,6 +880,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180223205658'),
 ('20180321085307'),
 ('20180403111538'),
-('20180412184342');
+('20180412184342'),
+('20180413105905');
 
 
