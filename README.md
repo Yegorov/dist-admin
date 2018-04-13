@@ -8,6 +8,7 @@ Administrative panel for differentiation of access rights to distributed system
 * Ruby 2.4.1 (2.5.0)
 * Stable NodeJS
 * OpenSSL 1.0.2
+* Hadoop 2.9.0
 
 ## How run app
 
@@ -22,6 +23,10 @@ $ bin/rails db:seed ADMIN_PASSWORD=YOU_SECRET_PASS ADMIN_EMAIL=youemail@example.
 $ bin/rails s
 $ bin/delayed_job start
 # Go to browser and open http://localhost:3000
+
+# if you need available to upload file in dev mode:
+$ sudo mkdir /userdata
+$ sudo chown USERNAME /userdata
 ```
 
 ## Test

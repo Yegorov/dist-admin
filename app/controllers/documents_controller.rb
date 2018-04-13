@@ -129,11 +129,17 @@ class DocumentsController < ApplicationController
       @upload_file.current_size = _end
       @upload_file.save!
 
+      # File is uploaded
+      if @upload_file.current_size == @upload_file.size
+        FileManager.delay(:queue => 'file').create_new_file(@upload_file.id)
+      end
+
       render plain: "", status: 200 and return
     end
 
     render plain: "", status: 400
-  rescue
+  rescue Exception => e
+    logger.error(e.inspect)
     render plain: "", status: 400
   end
 
