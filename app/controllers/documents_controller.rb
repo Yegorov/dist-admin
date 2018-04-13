@@ -43,13 +43,22 @@ class DocumentsController < ApplicationController
       if params[:password].present?
         # Encrypt/Decrypt file
         if params[:encrypt] == 'true'
-        # encrypt file with params[:password]
-        message = "The file will be encrypted, but now it's not available!"
+          if (7..50).include?(params[:password].length)
+            # encrypt file with params[:password]
+            FileManager.delay(:queue => 'file').encrypt_file(@document.id, {
+              ciphername: params[:cipher],
+              password: params[:password]
+            })
+            message = "The file will be encrypted, but now it's not available!"
+          else
+            error = "Password must have 7-50 symbols"
+          end
         elsif params[:encrypt] == 'false'
           # decrypt file with params[:password]
           # check password in encryptor
           if @document.encryptor.verify_pass_phrase(params[:password])
             # validation is ok!
+            FileManager.delay(:queue => 'file').decrypt_file(@document.id, params[:password])
             message = "The file will be available after the decryption!"
           else
             error = "Error password for decrypt!"
