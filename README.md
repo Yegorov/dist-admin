@@ -59,3 +59,9 @@ Things you may want to cover:
 * ...
 
 bin/rails db:drop db:create db:migrate db:seed
+
+```
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production bin/rails db:drop db:create db:migrate db:seed
+# restart postgres if db is lock: sudo service postgresql restart
+hdfs namenode -format
+```
