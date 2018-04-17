@@ -39,6 +39,8 @@ Rails.application.routes.draw do
       get 'new/folder', action: :new_folder, on: :collection, as: :new_folder
       post 'new/folder', action: :create_folder, on: :collection
 
+      get 'download', action: :download, on: :member, as: :download
+
       resources :permissions, except: [:new, :edit, :update, :destroy] do
         get 'new', action: :new, on: :collection, as: :new
         get ':user_login', action: :index_show, on: :collection, as: :index_show

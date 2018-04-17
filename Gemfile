@@ -53,6 +53,7 @@ gem "bugsnag", "~> 6.7"
 gem 'daemons'
 gem 'delayed_job', "~> 4.1.4"
 gem 'delayed_job_active_record', "~> 4.1.2"
+gem 'rails-reverse-proxy'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'

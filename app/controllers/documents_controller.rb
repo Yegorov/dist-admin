@@ -1,8 +1,10 @@
 require 'securerandom'
 
 class DocumentsController < ApplicationController
+  include ReverseProxy::Controller
+
   before_action :authenticate_user!
-  before_action :find_document, only: [:show, :edit, :update, :destroy]
+  before_action :find_document, only: [:show, :edit, :update, :destroy, :download]
 
   def index
     @documents = Document.order(name: :asc)
@@ -180,6 +182,25 @@ class DocumentsController < ApplicationController
     #binding.pry
     flash.now[:error] = "Error, try again!"
     render 'new_folder'
+  end
+
+  def download
+    begin
+      path = @document.real_path.sub('hdfs://', '')
+      reverse_proxy "http://localhost:50075/webhdfs/v1/#{path}" <<
+                    "?op=OPEN&namenoderpcaddress=localhost:9000&offset=0" do |config|
+        config.on_missing do |code, response|
+          redirect_to root_url, alert: "Something went wrong" and return
+        end
+        config.on_error do
+          redirect_to root_url, alert: "Something went wrong" and return
+        end
+      end
+    rescue Exception => e
+      Log.create(message: e.inspect! << " " << @document.inspect!,
+                 subject: "download file", status: "warn")
+      redirect_to root_url, alert: "Something went wrong" and return
+    end
   end
 
   private

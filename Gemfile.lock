@@ -207,6 +207,11 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-reverse-proxy (0.9.1)
+      addressable
+      rack
+      rack-proxy
+      rails
     rails_admin (1.3.0)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -355,6 +360,7 @@ DEPENDENCIES
   pundit (~> 1.1.0)
   rack-contrib (~> 2.0.1)
   rails (~> 5.1.6)
+  rails-reverse-proxy
   rails_admin (~> 1.3)
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)
