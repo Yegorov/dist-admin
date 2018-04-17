@@ -6,7 +6,7 @@
 #  name        :string           default(""), not null
 #  state       :integer          default("created"), not null
 #  prepared    :boolean          default(TRUE), not null
-#  unix_ppid   :string           default(""), not null
+#  unix_pid    :string           default(""), not null
 #  owner_id    :integer
 #  script_id   :integer
 #  started_at  :datetime
