@@ -342,6 +342,7 @@ CREATE TABLE tasks (
     name character varying DEFAULT ''::character varying NOT NULL,
     state integer DEFAULT 0 NOT NULL,
     prepared boolean DEFAULT true NOT NULL,
+    unix_ppid character varying DEFAULT ''::character varying NOT NULL,
     owner_id bigint,
     script_id bigint,
     started_at timestamp without time zone,
