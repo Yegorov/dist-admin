@@ -186,9 +186,12 @@ class DocumentsController < ApplicationController
 
   def download
     begin
-      path = @document.real_path.sub('hdfs://', '')
-      reverse_proxy "http://localhost:50075/webhdfs/v1/#{path}" <<
-                    "?op=OPEN&namenoderpcaddress=localhost:9000&offset=0" do |config|
+      file_path = @document.real_path.sub('hdfs://', '')
+      proxy_url = "http://localhost:50075"
+      path = "/webhdfs/v1/#{file_path}?op=OPEN&namenoderpcaddress=localhost:9000&offset=0"
+      logger.warn(proxy_url)
+      logger.warn(path)
+      reverse_proxy proxy_url, path: path do |config|
         config.on_missing do |code, response|
           redirect_to root_url, alert: "Something went wrong" and return
         end
