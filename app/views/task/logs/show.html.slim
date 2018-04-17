@@ -3,6 +3,7 @@
     | Log Message
   = link_to "Back to task logs", task_logs_path(@task), class: "btn btn-secondary float-right"
 .message
-  = @log.message
+  pre
+    = @log.message
 .created_at
   = @log.created_at.to_formatted_s(:long_ordinal)
