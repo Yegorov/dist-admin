@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class TaskManager
   class << self
     def start(task_id, user_id)
@@ -28,17 +30,56 @@ class TaskManager
                    subject: "TaskManager::start")
         return
       end
-      # Проверить файл
+      input_file_path = input_file.real_path.sub('hdfs://', '')
+      output_folder = "/userdata/#{user.login}/task_#{task.id}_#{Time.now.to_i.to_s}"
+      # Проверить файл input
       # PermitManager.allow()
 
-      # подготовить временные файлы (скрипты)
+      # Проверить файл output или создать его
 
+
+
+      # подготовить временные файлы (скрипты)
+      exts = { 'python' => 'py', 'ruby' => 'rb', 'golang' => 'go', 'javascript' => 'js'}
+      lang = task.script.language
+      tmp_dir = "/tmp/files_for_mapreduce/"
+      Dir.mkdir(tmp_dir) unless Dir.exists?(tmp_dir)
+      unique_id = [user.login, SecureRandom.hex(5), Time.now.to_i.to_s].join("_")
+      mapper_path = tmp_dir + "mapper_#{unique_id}.#{exts[lang]}"
+      reducer_path = tmp_dir + "reducer_#{unique_id}.#{exts[lang]}"
+
+      File.open(mapper_path, "w") do |f|
+        f.write(task.script.mapper.gsub("\r\n", "\n"))
+      end
+
+      File.open(reducer_path, "w") do |f|
+        f.write(task.script.reducer.gsub("\r\n", "\n"))
+      end
+
+      # set permission for run script chmod +x
+      unless system("chmod +x #{mapper_path} #{reducer_path}")
+        Log.create(message: "Not set permission for run script: " <<
+                   "#{task.inspect!}",
+                   status: "warn",
+                   subject: "TaskManager::start")
+        return
+      end
+
+      runCmd =
+        "hadoop jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/tools/lib/hadoop-streaming-2.9.0.jar " \
+        "-files \"#{mapper_path},#{reducer_path}\" " \
+        "-input \"#{input_file_path}\" " \
+        "-output \"#{output_folder}\" " \
+        "-mapper \"#{mapper_path}\" " \
+        "-reducer \"#{reducer_path}\" "
+
+      Log.create(message: "CMD:\n#{runCmd}", status: 'info', subject: "TaskManager::start")
 
       task.prepared!
       
       # Запуск самой задачи
-      #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 0 1"
-      cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 160 10000"
+      cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 0 1"
+      #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 160 10000"
       Open3.popen2e(ENV, cmd) do |_, stdouterr, wait_thr|
         task.update_column(:unix_pid, wait_thr[:pid])
 
@@ -66,7 +107,9 @@ class TaskManager
       end
       task.update_column(:unix_pid, "")
 
-      # Очистить временные файлы
+      # Очистить временные файлы, скрипты
+      #File.delete(mapper_path)
+      #sFile.delete(reducer_path)
 
     end
 
