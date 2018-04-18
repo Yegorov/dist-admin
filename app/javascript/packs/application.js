@@ -138,6 +138,7 @@ function initAce() {
             // editor.setTheme("ace/theme/idle_fingers");
             editor.session.setTabSize(language == "ruby" ? 2 : 4);
             editor.session.setUseSoftTabs(true);
+            editor.session.setNewLineMode('unix');
             editor.setReadOnly(false);
             
             // copy back to textarea on form submit...
@@ -160,6 +161,7 @@ function initEditor(id_elem) {
     editor.session.setMode("ace/mode/" + language);
     editor.session.setTabSize(language == "ruby" ? 2 : 4);
     editor.session.setUseSoftTabs(true);
+    editor.session.setNewLineMode('unix');
     editor.setReadOnly(readonly);
   }
 }
