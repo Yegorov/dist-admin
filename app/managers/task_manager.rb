@@ -31,9 +31,17 @@ class TaskManager
         return
       end
       input_file_path = input_file.real_path.sub('hdfs://', '')
-      output_folder = "/userdata/#{user.login}/task_#{task.id}_#{Time.now.to_i.to_s}"
+      output_file_name = "task_#{task.id}_#{Time.now.to_i.to_s}"
+      output_folder = "/userdata/#{user.login}/#{output_file_name}"
       # Проверить файл input
       # PermitManager.allow()
+      unless PermitManager.allow?(input_file, user, Action::Read)
+        task.prepared!
+        task.stop
+        task.prepared!
+        TaskLog.create(state: :stopped, message: "Input file #{input_file.name} not allowed to read", task: task)
+        return
+      end
 
       # Проверить файл output или создать его
 
@@ -78,8 +86,9 @@ class TaskManager
       task.prepared!
       
       # Запуск самой задачи
-      cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 0 1"
+      #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 0 1"
       #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 160 10000"
+      cmd = runCmd
       Open3.popen2e(ENV, cmd) do |_, stdouterr, wait_thr|
         task.update_column(:unix_pid, wait_thr[:pid])
 
@@ -107,9 +116,16 @@ class TaskManager
       end
       task.update_column(:unix_pid, "")
 
+      # Приcоединение созданного выходного файла
+      file = FileEntity::File.mk_file(name: "result_#{output_file_name}",
+                                      real_path: "#{output_folder}/part-00000",
+                                      user: user)
+      file.prepared = true
+      file.save
+
       # Очистить временные файлы, скрипты
       #File.delete(mapper_path)
-      #sFile.delete(reducer_path)
+      #File.delete(reducer_path)
 
     end
 
@@ -155,7 +171,7 @@ class TaskManager
 
       TaskLog.create(state: :started, task: task,
                      message: "Restart task")
-      # self.start(task.id, user.id)
+      self.start(task.id, user.id)
     end
   end
 end
