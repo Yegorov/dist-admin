@@ -1,18 +1,18 @@
 .clearfix
   h1 class="float-left"
-    | Documents Logs
-  = link_to "Back to documents", documents_path, class: "btn btn-secondary float-right"
+    = t("documents_logs", scope: "document.logs")
+  = link_to t("back_to_documents", scope: "document.logs"), documents_path, class: "btn btn-secondary float-right"
 
 
 table class="table"
   thead
     tr
       th scope="col" #
-      th scope="col" Document
-      th scope="col" User
-      th scope="col" Action
-      th scope="col" Date (created)
-      th scope="col" Message
+      th scope="col" = t("document", scope: "document.logs")
+      th scope="col" = t("user", scope: "document.logs")
+      th scope="col" = t("action", scope: "document.logs")
+      th scope="col" = t("date_created", scope: "document.logs")
+      th scope="col" = t("message", scope: "document.logs")
   tbody
     - @logs.each_with_index do |log, idx|
       - idx = (@logs.current_page - 1) * @logs.current_per_page + (idx + 1)
@@ -21,7 +21,8 @@ table class="table"
         td = link_to log.document.name, document_logs_path(log.document.iid)
         td = link_to log.user.name, index_user_document_logs_path(log.document.iid, log.user.login)
         td = log.action.title
-        td = log.created_at.to_formatted_s(:long_ordinal)
+        td = l(log.created_at, format: :long)
+        /td = log.created_at.to_formatted_s(:long_ordinal)
         td = link_to log.message, show_log_documents_path(log)
 
 = paginate @logs

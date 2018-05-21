@@ -1,23 +1,24 @@
-h1 class="float-left" Scripts
-= link_to "Create new script", new_script_path, class: "btn btn-primary float-right"
+h1 class="float-left" = t(".scripts")
+= link_to t(".create_script"), new_script_path, class: "btn btn-primary float-right"
 
 table class="table"
   thead
     tr
       th scope="col" #
-      th scope="col" Name
-      th scope="col" Date (update)
-      th scope="col" Actions
+      th scope="col" = t(".name")
+      th scope="col" = t(".date_update")
+      th scope="col" = t(".actions")
   tbody
     - @scripts.each_with_index do |script, idx|
       - idx = (@scripts.current_page - 1) * @scripts.current_per_page + (idx + 1)
       tr
         td = idx
         td = script.name
-        td = script.updated_at.to_formatted_s(:long_ordinal)
+        td = l(script.updated_at, format: :long)
+        /td = script.updated_at.to_formatted_s(:long_ordinal)
         td
-          = link_to "Open", script_path(script), class: "btn btn-success mr-2"
-          = link_to "Edit", edit_script_path(script), class: "btn btn-warning mr-2"
-          = link_to "Remove", script_path(script), method: :delete, class: "btn btn-danger"
+          = link_to t(".open"), script_path(script), class: "btn btn-success mr-2"
+          = link_to t("edit"), edit_script_path(script), class: "btn btn-warning mr-2"
+          = link_to t("remove"), script_path(script), method: :delete, class: "btn btn-danger"
 
 = paginate @scripts

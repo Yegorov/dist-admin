@@ -130,6 +130,10 @@ en:
     password: Password
     remember_me: Remember me
   tasks:
+    tasks: Tasks
+    start: "Start"
+    restart: "Restart"
+    stop: "Stop"
     show:
       task: "Task"
       tasks: "Tasks"
@@ -141,9 +145,100 @@ en:
       date_finished: "Date finished"
       running_time: "Running time"
       actions: "Actions"
-      start: "Start"
-      restart: "Restart"
-      stop: "Stop"
       actions_not_perfomed: "Actions not perfomed, because task finished"
       task_logs: "Task logs"
       view_logs: "View logs"
+    index:
+      tasks: Tasks
+      create_task: Create new task
+      name: Name
+      state: State
+      date_update: Date (updated)
+      actions: Actions
+      open: Open
+    create_task: Create task
+    name: Name
+    script: Script
+    select_script: Select script
+  scripts:
+    scripts: Scripts
+    index:
+      scripts: Scripts
+      create_script: Create new script
+      name: Name
+      date_update: Date (updated)
+      actions: Actions
+      open: Open
+    show:
+      script: Script
+      language: Language
+      description: Description
+      mapper: Mapper
+      reducer: Reducer
+      input_file: Input file
+      output_file: Output file
+    edit_script: Edit script
+    create_script: Create script
+    language: Language
+    description: Description
+    mapper: Mapper
+    reducer: Reducer
+    input: Input file
+    output: Output file
+  document:
+    logs:
+      document_log: Document Logs
+      back_to_logs: Back to logs
+      logs_for_document: Logs for document
+      user: User
+      action: Action
+      date_created: Date (created)
+      message: Message
+      back_to_documents: Back to documents
+      documents_logs: Documents Logs
+      document: Document
+      document_logs: Documents Logs
+      user: User
+      log_message: Log Message
+      back_to_document_logs: Back to document logs
+  task:
+    logs:
+      task_logs: Task Logs
+      back_to_task: Back to task
+      task: Task
+      state: State
+      date_created: Date (created)
+      message: Message
+      log_message: Log Message
+      back_to_task_logs: Back to task logs
+  permissions:
+    index:
+      permissions_for: Permissions for
+      file: File
+      folder: Folder
+      document_property: Document property
+      create_permission: Create permission
+      document_owner: Document owner
+      for_user: For user
+      last_updated_date: Last updated date
+    index_show:
+      permissions_for: Permissions for
+      file: File
+      folder: Folder
+      document_permissions: Document permissions
+      edit_permissions: Edit permissions
+      document_owner: Document owner
+      for_user: For user
+      allow_action: Allow action
+      updated_date: Updated date
+    edit_permissions_for: Edit Permissions for
+    file: File
+    folder: Folder
+    document_owner: Document owner
+    for_user: For user
+    document_permissions: Document permissions
+    create_permission: Create Permission
+    user: User
+    action: Action
+    select_user: Select user
+    select_action: Select action

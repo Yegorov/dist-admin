@@ -1,16 +1,16 @@
 .clearfix
   h1 class="float-left"
-    | Task Logs
-  = link_to "Back to task", task_path(@task), class: "btn btn-secondary float-right"
+    = t("task_logs", scope: "task.logs")
+  = link_to t("back_to_task", scope: "task.logs"), task_path(@task), class: "btn btn-secondary float-right"
 
 table class="table"
   thead
     tr
       th scope="col" #
-      th scope="col" Task
-      th scope="col" State
-      th scope="col" Date (created)
-      th scope="col" Message
+      th scope="col" = t("task", scope: "task.logs")
+      th scope="col" = t("state", scope: "task.logs")
+      th scope="col" = t("date_created", scope: "task.logs")
+      th scope="col" = t("message", scope: "task.logs")
   tbody
     - @logs.each_with_index do |log, idx|
       - idx = (@logs.current_page - 1) * @logs.current_per_page + (idx + 1)
@@ -18,8 +18,9 @@ table class="table"
         td = idx
         -# or td = @task.name
         td = log.task.name
-        td = log.state
-        td = log.created_at.to_formatted_s(:long_ordinal)
+        td = t(log.state, scope: "tasks.states", default: log.state)
+        td = l(log.created_at, format: :long)
+        /td = log.created_at.to_formatted_s(:long_ordinal)
         td = link_to truncate(log.message, length: 120, separator: ' '), task_log_path(log.task, log)
 
 = paginate @logs

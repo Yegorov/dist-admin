@@ -1,18 +1,21 @@
 .clearfix
   h1.float-left
-    | Edit permissions for&nbsp;
-    = @document.type_s
+    = t("permissions.edit_permissions_for")
+    | &nbsp;
+    = t("permissions.#{@document.type_s.downcase}", default: @document.type_s)
     | :&nbsp;
     = @document.name
-  = link_to "Document permissions", index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary float-right mr-2"
+  = link_to t("permissions.document_permissions"), index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary float-right mr-2"
 
 
 h3 
-  | Document owner:&nbsp;
+  = t("permissions.document_owner")
+  | :&nbsp;
   = @document.owner.name
 
 h3 
-  | Permissions for:&nbsp;
+  = t("permissions.permissions_for")
+  | :&nbsp;
   = @user.name
 
 
@@ -20,5 +23,5 @@ h3
 
 = form_tag update_document_permissions_path(@document.iid, @user.login), method: :patch, id: 'permission-tree-form' do
   = hidden_field_tag 'permission_actions', @permissions_for_input, id: 'permission_actions'
-  = submit_tag 'Save', class: "btn btn-primary mr-2"
-  = link_to "Cancel", index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary mr-2"
+  = submit_tag t('save'), class: "btn btn-primary mr-2"
+  = link_to t("cancel"), index_show_document_permissions_path(@document.iid, @user.login), class: "btn btn-secondary mr-2"

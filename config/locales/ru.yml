@@ -98,15 +98,19 @@ ru:
     password: Пароль
     remember_me: Запомнить
   tasks:
+    states:
+      created: Создана
+      started: Запущена
+      stopped: Остановлена
+      finished: Завершена
+    tasks: Задачи
+    start: "Запустить"
+    restart: "Перезапустить"
+    stop: "Остановить"
     show:
       task: "Задача"
       tasks: "Задачи"
       state: "Состояние"
-      states:
-        created: Создана
-        started: Запущена
-        stopped: Остановлена
-        finished: Завершена
       script: "Скрипт"
       date_created: "Дата создания"
       date_started: "Дата запуска"
@@ -114,9 +118,101 @@ ru:
       date_finished: "Дата завершения"
       running_time: "Время работы"
       actions: "Действия"
-      start: "Запустить"
-      restart: "Перезапустить"
-      stop: "Остановить"
       actions_not_perfomed: "Нет доступный действий для выполнения, так как задача завершена"
       task_logs: "Логи задачи"
       view_logs: "Просмотреть логи"
+    index:
+      tasks: Задачи
+      create_task: Создать новую задачу
+      name: Название
+      state: Состояние
+      date_update: Дата (обновление)
+      actions: Действия
+      open: Открыть
+    create_task: Создать задачу
+    name: Название
+    script: Скрипт
+    select_script: Выбрать скрипт
+  scripts:
+    scripts: Скрипты
+    index:
+      scripts: Скрипты
+      create_script: Создать новый скрипт
+      name: Название
+      date_update: Дата (обновление)
+      actions: Действия
+      open: Открыть
+    show:
+      script: Скрипт
+      language: Язык
+      description: Описание
+      mapper: Mapper
+      reducer: Reducer
+      input_file: Входящий файл
+      output_file: Выходящий файл
+    edit_script: Редактировать скрипт
+    create_script: Создать скрипт
+    name: Название
+    language: Язык
+    description: Описание
+    mapper: Mapper
+    reducer: Reducer
+    input: Входящий файл
+    output: Выходящий файл
+  document:
+    logs:
+      document_log: Логи документов
+      back_to_logs: Вернуться к логам
+      logs_for_document: Логи для документа
+      user: Пользователь
+      action: Действие
+      date_created: Дата (создание)
+      message: Сообщение
+      back_to_documents: Вернуться к документам
+      documents_logs: Логи документов
+      document: Документ
+      document_logs: Логи документа
+      user: Пользователь
+      log_message: Сообщение лога
+      back_to_document_logs: Вернуться к логам документа
+  task:
+    logs:
+      task_logs: Логи задачи
+      back_to_task: Вернуться к задаче
+      task: Задача
+      state: Состояние
+      date_created: Дата (создание)
+      message: Сообщение
+      log_message: Сообщение лога
+      back_to_task_logs: Вернуться к логам задачи
+  permissions:
+    index:
+      permissions_for: Разрешения для
+      file: файла
+      folder: папки
+      document_property: Свойства документа
+      create_permission: Создать разрешение
+      document_owner: Владелец документа
+      for_user: Для пользователя
+      last_updated_date: Дата последнего обновления
+    index_show:
+      permissions_for: Разрешения для
+      file: файла
+      folder: папки
+      document_permissions: Разрешения документа
+      edit_permissions: Редактировать разрешение
+      document_owner: Владелец документа
+      for_user: Для пользователя
+      allow_action: Разрешенное действие
+      updated_date: Дата обновления
+    edit_permissions_for: Редактировать разрешения для
+    file: файла
+    folder: папки
+    document_owner: Владелец документа
+    for_user: Для пользователя
+    document_permissions: Разрешения документа
+    create_permission: Создать разрешение
+    user: Пользователь
+    action: Действие
+    select_user: Выбрать пользователя
+    select_action: Выбрать действие

@@ -1,8 +1,9 @@
 .clearfix
   h1 class="float-left"
-    | Log Message
-  = link_to "Back to document logs", document_logs_path(@log.document), class: "btn btn-secondary float-right"
+    = t("log_message", scope: "document.logs")
+  = link_to t("back_to_document_logs", scope: "document.logs"), document_logs_path(@log.document), class: "btn btn-secondary float-right"
 .message
   = @log.message
 .created_at
-  = @log.created_at.to_formatted_s(:long_ordinal)
+  = l(@log.created_at, format: :long)
+  /= @log.created_at.to_formatted_s(:long_ordinal)

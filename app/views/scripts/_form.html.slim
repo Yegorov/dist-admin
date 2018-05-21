@@ -1,31 +1,31 @@
 = form_for(script) do |f|
   = render 'shared/error_messages', f: f
   .form-group
-    = f.label :name
+    = f.label t("scripts.name")
     = f.text_field :name, class: "form-control form-control-lg"
   
   .form-group
-    = f.label :language
+    = f.label t("scripts.language")
     = f.select :language, options_for_select(Script.languages.keys, script.language), {}, class: "form-control"
 
   .form-group
-    = f.label :description
+    = f.label t("scripts.description")
     = f.text_area :description, class: "form-control", rows: 7
 
   .form-group
-    = f.label :mapper
+    = f.label t("scripts.mapper")
     = f.text_area :mapper, class: "ace", data: { language: "#{script.language}", readonly: false }
 
   .form-group
-    = f.label :reducer
+    = f.label t("scripts.reducer")
     = f.text_area :reducer, class: "ace", data: { language: "#{script.language}", readonly: false }
 
   .form-group
-    = f.label :input
+    = f.label t("scripts.input")
     = f.text_field :input, class: "form-control"
 
   /.form-group
-    = f.label :output
+    = f.label t("scripts.output")
     = f.text_field :output, class: "form-control"
 
-  = f.submit "Save script", class: "btn btn-primary"
+  = f.submit t("save"), class: "btn btn-primary"

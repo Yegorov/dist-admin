@@ -34,11 +34,11 @@ h3
   | :
 .actions
   - if @task.can_start?
-    = link_to t(".start"), start_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+    = link_to t("tasks.start"), start_task_path(@task), method: :post, class: "btn btn-danger mr-2"
   - if @task.can_restart?
-    = link_to t(".restart"), restart_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+    = link_to t("tasks.restart"), restart_task_path(@task), method: :post, class: "btn btn-danger mr-2"
   - if @task.can_stop?
-    = link_to t(".stop"), stop_task_path(@task), method: :post, class: "btn btn-danger mr-2"
+    = link_to t("tasks.stop"), stop_task_path(@task), method: :post, class: "btn btn-danger mr-2"
   - if @task.finished?
     = link_to t('.actions_not_perfomed'), "#", class: "btn btn-danger mr-2"
 
