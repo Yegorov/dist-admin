@@ -20,6 +20,8 @@ module DistAdmin
     config.i18n.available_locales = [:en, :ru]
 
     #config.middleware.use Rack::Locale
+    config.middleware.insert_before Warden::Manager, Rack::Locale
+
     config.middleware.use Rack::TempfileReaper
 
     config.active_job.queue_adapter = :delayed_job
