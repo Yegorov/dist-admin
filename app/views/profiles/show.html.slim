@@ -1,23 +1,23 @@
-h1 Profile
+h1 = t("profile.profile")
 - if current_user?(@user) || @user.public
   table class="table"
     tbody
       tr
-        td Name
+        td = t("profile.name")
         td = @user.name
       tr
-        td Login
+        td = t("profile.login")
         td = @user.login
       tr
-        td Email
+        td = t("profile.email")
         td = @user.email
       tr
-        td Role
+        td = t("profile.role")
         td = @user.role
       tr
-        td Public
+        td = t("profile.public")
         td = check_box_tag '', '', @user.public, disabled: true
   - if current_user?(@user)
-    = link_to 'Edit', profile_edit_path(@user), class: "btn btn-primary"
+    = link_to t('edit'), profile_edit_path(@user), class: "btn btn-primary"
 - else
-  p = "User '#{@user.name}' has hidden his profile"
+  p = t("profile.user_hidden_msg", username: @user.name)

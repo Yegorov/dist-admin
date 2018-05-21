@@ -3,27 +3,27 @@
                url: session_path(resource_name),
                html: { class: "form-sign" }) do |f| %>
     <img class="mb-4" src="/android-icon-72x72.png" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+    <h1 class="h3 mb-3 font-weight-normal"><%= t("sign_in_subject") %></h1>
 
     <%= f.label :email, class: "sr-only" %>
     <%= f.email_field :email, autofocus: true,
                               required: true,
                               autocomplete: "email",
-                              placeholder: "Email address",
+                              placeholder: t("new_session.email"),
                               class: "form-control" %>
     <%= f.label :password, class: "sr-only" %>
     <%= f.password_field :password, autocomplete: "off",
                                     required: true,
-                                    placeholder: "Password",
+                                    placeholder: t("new_session.password"),
                                     class: "form-control" %>
 
     <div class="checkbox mb-3">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label t("new_session.remember_me") %>
     </div>
 
-    <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block" %>
-    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-success btn-block", role: "button" %>
+    <%= f.submit t("sign_in"), class: "btn btn-lg btn-primary btn-block" %>
+    <%= link_to t("sign_up"), new_user_registration_path, class: "btn btn-lg btn-success btn-block", role: "button" %>
   <% end %>
 </div>
 

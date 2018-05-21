@@ -1,4 +1,4 @@
-<h2 class="row align-items-center justify-content-center">Sign up</h2>
+<h2 class="row align-items-center justify-content-center"><%= t("sign_up_subject") %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
              html: { class: "form-sign" }) do |f| %>
@@ -8,20 +8,20 @@
     <%= f.text_field :name, autofocus: true,
                             required: true,
                             autocomplete: "off",
-                            placeholder: "Name",
+                            placeholder: t("new_user.name"),
                             class: "form-control" %>
 
     <%= f.label :login, class: "sr-only" %>
     <%= f.text_field :login, autofocus: true,
                             required: true,
                             autocomplete: "off",
-                            placeholder: "Login",
+                            placeholder: t("new_user.login"),
                             class: "form-control" %>
 
     <%= f.label :email, class: "sr-only" %>
     <%= f.email_field :email, autocomplete: "email",
                               required: true,
-                              placeholder: "Email",
+                              placeholder: t("new_user.email"),
                               class: "form-control" %>
   
 
@@ -29,16 +29,16 @@
     <%= f.label :password, class: "sr-only" %>
     <%= f.password_field :password, autocomplete: "off",
                                     required: true,
-                                    placeholder: "Password (#{@minimum_password_length} characters minimum)",
+                                    placeholder: t("new_user.password", minimum: @minimum_password_length),
                                     class: "form-control" %>
 
     <%= f.label :password_confirmation, class: "sr-only" %>
     <%= f.password_field :password_confirmation, autocomplete: "off",
                                                  required: true,
-                                                 placeholder: "Password confirmation",
+                                                 placeholder: t("new_user.password_confirm"),
                                                  class: "form-control" %>
 
-  <%= f.submit "Sign up", class: "btn btn-lg btn-success btn-block my-3" %>
+  <%= f.submit t("sign_up"), class: "btn btn-lg btn-success btn-block my-3" %>
 <% end %>
 
 <%#= render "users/shared/links" %>

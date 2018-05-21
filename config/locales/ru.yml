@@ -1,4 +1,102 @@
 ru:
+  sign_in_subject: Вход
+  sign_in: Войти
+  sign_up_subject: Регистрация
+  sign_up: Зарегистрироваться
+  sign_out: Выйти
+  edit: Редактировать
+  show: Просмотреть
+  delete: Удалить
+  remove: Удалить
+  save: Сохранить
+  cancel: Отменить
+  back: Назад
+  download: Скачать
+  upload: Загрузить
+  create: Создать
+  menu:
+    administrator: Панель администратора
+    my_profile: Мой профиль
+    documents: Документы
+    tasks: Задачи
+    task: Новая задача
+    scripts: Скрипты
+    script: Новый скрипт
+    create: Создать
+    home: Главная
+    about: Контакты
+    help: Помощь
+  home:
+    project_name: Distributed Admin
+    project_desc: Административная панель для разграничения прав доступа к распределенной системе
+  profile:
+    profile: Учетная запись
+    name: Имя
+    login: Логин
+    email: Электронная почта
+    role: Роль
+    public: Публичный
+    user_hidden_msg: Пользователь %{username} скрыл свою учетную запись
+    edit_profile: Редактировать учетную запись
+  documents:
+    index:
+      documents: Файлы и папки
+      name: Название
+      date_update: Дата (обновление)
+      type: Тип
+      actions: Действия
+      file: Файл
+      folder: Папка
+      property: Свойства
+      remove: Удалить
+      upload_file: Загрузить файл
+      create_folder: Создать папку
+      view_logs: Просмотреть логи
+    show:
+      file: Файл
+      folder: Папка
+      property: Свойство
+      value: Значение
+      parent: Родительская папка
+      root: Корневая папка
+      owner: Владелец
+      creator: Создатель
+      type: Тип
+      size: Размер
+      checksum: MD5 хеш
+      is_encrypt: Зашифрованный
+      'true': Да
+      'false': Нет
+      created_date: Дата создания
+      updated_date: Дата обновления
+      permissions: Разрешения
+      view_logs: Просмотреть логи
+    edit:
+      edit: Редактировать
+      file: файл
+      folder: папку
+      name: Название
+      encryption: Шифрование
+      encrypt: Зашифрованный
+      enter_pass: Введите пароль
+      'true': Да
+      'false': Нет
+    new_file:
+      upload_file: Загрузить файл
+      choose_file: Выбрать файл
+    new_folder:
+      create_folder: Создать папку
+      folder_name: Название папки
+  new_user:
+    name: Имя
+    login: Логин
+    email: Электронная почта
+    password: Пароль (минимум %{minimum} символов)
+    password_confirm: Подтвердите пароль
+  new_session:
+    email: Электронная почта
+    password: Пароль
+    remember_me: Запомнить
   tasks:
     show:
       task: "Задача"

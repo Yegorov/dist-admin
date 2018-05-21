@@ -1,4 +1,4 @@
-h1 Edit your profile
+h1 = t("profile.edit_profile")
 
 - if @user.errors.any?
   #error_explanation
@@ -11,10 +11,10 @@ h1 Edit your profile
   table class="table"
     tbody
       tr
-        td = f.label :name
+        td = f.label t("profile.name")
         td = f.text_field :name
       tr
-        td = f.label :public
+        td = f.label t("profile.public")
         td = f.check_box :public
-  = f.submit class: "btn btn-success mr-2"
-  = link_to "Cancel", profile_path(@user), class: "btn btn-secondary"
+  = f.submit t('save'), class: "btn btn-success mr-2"
+  = link_to t("cancel"), profile_path(@user), class: "btn btn-secondary"

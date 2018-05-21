@@ -1,6 +1,7 @@
 h1
-  | Edit&nbsp;
-  = @original_document.type_s
+  = t(".edit")
+  | &nbsp;
+  = t(".#{@original_document.type_s.downcase}", default: @original_document.type_s)
   | :&nbsp;
   = @original_document.name
 
@@ -9,18 +10,18 @@ h1
                       url: document_path(@document.iid)) do |f|
   = render 'shared/error_messages', f: f
   .form-group
-    = f.label :name
+    = f.label t(".name")
     = f.text_field :name, class: "form-control form-control-lg"
 
   - if @document.file?
     .form-group
-      = link_to "Encryption", "#encryption", class: "btn btn-warning", data: { toggle: "collapse" }
+      = link_to t(".encryption"), "#encryption", class: "btn btn-warning", data: { toggle: "collapse" }
     #encryption.form-group.collapse
-      = label_tag :encrypt, nil, { class: "mr-4" }
+      = label_tag t(".encrypt"), nil, { class: "mr-4" }
       -# check_box_tag :encrypt, value = "1", checked = @document.encrypted?
-      = select_tag :encrypt, options_for_select([ "true", "false" ], @document.encrypted?), class: "mr-4"
-      = password_field_tag :password, nil, class: "mr-4", placeholder: "Enter password"
+      = select_tag :encrypt, options_for_select([[t(".true"), true], [t(".false"), false]], @document.encrypted?), class: "mr-4"
+      = password_field_tag :password, nil, class: "mr-4", placeholder: t(".enter_pass")
       = select_tag :cipher, options_for_select(Encryptor::CIPHERS, @document.encrypted? ? @document.encryptor.cipher : Encryptor::CIPHERS.first), class: "mr-4"
 
-  = f.submit "Save", class: "btn btn-primary mr-2"
-  = link_to "Cancel", document_path(@document.iid), class: "btn btn-secondary"
+  = f.submit t("save"), class: "btn btn-primary mr-2"
+  = link_to t("cancel"), document_path(@document.iid), class: "btn btn-secondary"

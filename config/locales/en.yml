@@ -31,6 +31,104 @@
 
 en:
   hello: "Hello world"
+  sign_in_subject: Sign in
+  sign_in: Sign in
+  sign_up_subject: Sign up
+  sign_up: Sign up
+  sign_out: Sign out
+  edit: Edit
+  show: Show
+  delete: Delete
+  remove: Remove
+  save: Save
+  cancel: Cancel
+  back: Back
+  download: Download
+  upload: Upload
+  create: Create
+  menu:
+    administrator: Administrator
+    my_profile: My Profile
+    documents: Documents
+    tasks: Tasks
+    task: Task
+    scripts: Scripts
+    script: Script
+    create: Create
+    home: Home
+    about: About
+    help: Help
+  home:
+    project_name: Distributed Admin
+    project_desc: Administrative panel for differentiation of access rights to distributed system
+  profile:
+    profile: Profile
+    name: Name
+    login: Login
+    email: Email
+    role: Role
+    public: Public
+    user_hidden_msg: User %{username} has hidden his profile
+    edit_profile: Edit your profile
+  documents:
+    index:
+      documents: Documents
+      name: Name
+      date_update: Date (update)
+      type: Type
+      actions: Actions
+      file: File
+      folder: Folder
+      property: Property
+      remove: Remove
+      upload_file: Upload file
+      create_folder: Create folder
+      view_logs: View logs
+    show:
+      file: File
+      folder: Folder
+      property: Property
+      value: Value
+      parent: Parent
+      root: Root
+      owner: Owner
+      creator: Creator
+      type: Type
+      size: Size
+      checksum: MD5 checksum
+      is_encrypt: Is encrypt
+      'true': Yes
+      'false': No
+      created_date: Created date
+      updated_date: Updated date
+      permissions: Permissions
+      view_logs: View logs
+    edit:
+      edit: Edit
+      file: File
+      folder: Folder
+      name: Name
+      encryption: Encryption
+      encrypt: Encrypt
+      enter_pass: Enter password
+      'true': Yes
+      'false': No
+    new_file:
+      upload_file: Upload file
+      choose_file: Choose file
+    new_folder:
+      create_folder: Create folder
+      folder_name: Folder name
+  new_user:
+    name: Name
+    login: Login
+    email: Email
+    password: Password (%{minimum} characters minimum)
+    password_confirm: Password confirmation
+  new_session:
+    email: Email
+    password: Password
+    remember_me: Remember me
   tasks:
     show:
       task: "Task"

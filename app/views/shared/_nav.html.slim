@@ -16,29 +16,29 @@ nav class="navbar navbar-expand-md navbar-light bg-light fixed-top"
       - if current_user.present?
         - if current_user.admin?
           li class="nav-item"
-            a class="nav-link" href="#{rails_admin_path}" Administrator
+            a class="nav-link" href="#{rails_admin_path}" = t("menu.administrator")
         li class="nav-item #{active?(profile_path(current_user))}"
-          a class="nav-link" href="#{profile_path(current_user)}" My Profile
+          a class="nav-link" href="#{profile_path(current_user)}" = t("menu.my_profile")
         li class="nav-item #{active?(documents_path)}"
-          a class="nav-link" href="#{documents_path}" Documents
+          a class="nav-link" href="#{documents_path}" = t("menu.documents")
         li class="nav-item #{active?(tasks_path(login: current_user.login))}"
-          a class="nav-link" href="#{tasks_path(login: current_user.login)}" Tasks
+          a class="nav-link" href="#{tasks_path(login: current_user.login)}" = t("menu.tasks")
         li class="nav-item #{active?(scripts_path(login: current_user.login))}"
-          a class="nav-link" href="#{scripts_path(login: current_user.login)}" Scripts
+          a class="nav-link" href="#{scripts_path(login: current_user.login)}" = t("menu.scripts")
         li class="nav-item dropdown"
-          a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Create
+          a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" = t("menu.create")
           div class="dropdown-menu" aria-labelledby="dropdown01"
-            = link_to "Script", new_script_path, class: "dropdown-item"
-            = link_to "Task", new_task_path, class: "dropdown-item"
+            = link_to t("menu.script"), new_script_path, class: "dropdown-item"
+            = link_to t("menu.task"), new_task_path, class: "dropdown-item"
       - else
         = render 'shared/general_links'
     ul class="navbar-nav navbar-right"
       li class="nav-item"
         - if current_user.present?
           = render 'shared/general_links'
-          = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link'
+          = link_to t("sign_out"), destroy_user_session_path, method: :delete, class: 'nav-link'
         - else
-          = link_to "Sign in", new_user_session_path, class: "nav-link #{active?(new_user_session_path)}"
+          = link_to t("sign_in"), new_user_session_path, class: "nav-link #{active?(new_user_session_path)}"
     
     /form class="form-inline my-2 my-lg-0"
       input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"

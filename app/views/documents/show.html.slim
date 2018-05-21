@@ -1,53 +1,55 @@
-h1 = @document.type_s
+h1 = t(".#{@document.type_s.downcase}", default: @document.type_s)
 
 h2 = @document.name
 
 table class="table" cellpadding="0" cellspacing="0"
   thead
     tr
-      th scope="col" Property
-      th scope="col" Value
+      th scope="col" = t(".property")
+      th scope="col" = t(".value")
   tbody
     tr
-      td Parent
+      td = t(".parent")
       - if @parent_document
         td = link_to @parent_document.name, document_path(@parent_document.iid)
       - else
-        td = link_to "Root", documents_path
+        td = link_to t(".root"), documents_path
     tr
-      td Owner
+      td = t(".owner")
       td = link_to @owner.name, profile_path(@owner)
     tr
-      td Creator
+      td = t(".creator")
       td = link_to @creator.name, profile_path(@creator)
     tr
-      td Type
-      td = @document.type_s
+      td = t(".type")
+      td = t(".#{@document.type_s.downcase}", default: @document.type_s)
     - if @document.file?
       tr
-        td Size
+        td = t(".size")
         td = @document.size
       tr
-        td MD5 checksum
+        td = t(".checksum")
         td = @document.hash_sum
       tr
-        td Is encrypt
+        td = t(".is_encrypt")
         td 
-          = @document.encrypted?
+          = t(".#{@document.encrypted?}")
           - if @document.encrypted?
             |&nbsp;(
             = @document.encryptor.cipher
             | )
     tr
-      td Created date
-      td = @document.created_at.to_formatted_s(:long_ordinal)
+      td = t(".created_date")
+      td = l(@document.created_at, format: :long)
+      /td = @document.created_at.to_formatted_s(:long_ordinal)
     tr
-      td Updated date
-      td = @document.updated_at.to_formatted_s(:long_ordinal)
+      td = t(".updated_date")
+      td = l(@document.updated_at, format: :long)
+      /td = @document.updated_at.to_formatted_s(:long_ordinal)
 
-= link_to "Edit", edit_document_path(@document.iid), class: "btn btn-warning mr-2"
-= link_to "Remove", document_path(@document.iid), method: :delete, class: "btn btn-danger mr-2"
+= link_to t("edit"), edit_document_path(@document.iid), class: "btn btn-warning mr-2"
+= link_to t("remove"), document_path(@document.iid), method: :delete, class: "btn btn-danger mr-2"
 - if @document.file?
-  = link_to "Download", download_document_path(@document.iid), class: "btn btn-success mr-2"
-= link_to "Permissions", document_permissions_path(@document.iid), class: "btn btn-primary mr-2"
-= link_to "View logs", document_logs_path(@document.iid), class: "btn btn-primary mr-2"
+  = link_to t("download"), download_document_path(@document.iid), class: "btn btn-success mr-2"
+= link_to t(".permissions"), document_permissions_path(@document.iid), class: "btn btn-primary mr-2"
+= link_to t(".view_logs"), document_logs_path(@document.iid), class: "btn btn-primary mr-2"
