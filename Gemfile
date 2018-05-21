@@ -55,6 +55,11 @@ gem 'delayed_job', "~> 4.1.4"
 gem 'delayed_job_active_record', "~> 4.1.2"
 gem 'rails-reverse-proxy'
 
+gem 'rails_admin-i18n'
+gem 'rails-i18n', '~> 5.1'
+gem 'kaminari-i18n'
+
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
