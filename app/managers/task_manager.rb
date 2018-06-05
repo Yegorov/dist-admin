@@ -89,6 +89,7 @@ class TaskManager
       #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 0 1"
       #cmd = "yarnhd jar /usr/local/hadoop/hadoop-2.9.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.0.jar pi 160 10000"
       cmd = runCmd
+      exit_success = true
       Open3.popen2e(ENV, cmd) do |_, stdouterr, wait_thr|
         task.update_column(:unix_pid, wait_thr[:pid])
 
@@ -99,6 +100,7 @@ class TaskManager
           output = stdouterr.read
           if output != ""
             TaskLog.create(state: :finished, message: output, task: task)
+            exit_success = false
           end
 
           TaskLog.create(state: :finished, message: "Task finished successful!", task: task)
@@ -109,6 +111,7 @@ class TaskManager
           output = stdouterr.read
           if output != ""
             TaskLog.create(state: :stopped, message: output, task: task)
+            exit_success = false
           end
 
           TaskLog.create(state: :stopped, message: "The task was stopped due to an error", task: task)
@@ -116,12 +119,14 @@ class TaskManager
       end
       task.update_column(:unix_pid, "")
 
-      # Приcоединение созданного выходного файла
-      file = FileEntity::File.mk_file(name: "result_#{output_file_name}",
-                                      real_path: "#{output_folder}/part-00000",
-                                      user: user)
-      file.prepared = true
-      file.save
+      unless exit_success
+        # Приcоединение созданного выходного файла
+        file = FileEntity::File.mk_file(name: "result_#{output_file_name}",
+                                        real_path: "#{output_folder}/part-00000",
+                                        user: user)
+        file.prepared = true
+        file.save
+      end
 
       # Очистить временные файлы, скрипты
       #File.delete(mapper_path)

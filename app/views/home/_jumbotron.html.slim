@@ -4,7 +4,7 @@ div class="container"
     p class="lead" = t("home.project_desc")
     - if current_user.blank?
       hr class="my-4"
-      p If you are not yet with us, register now
+      p = t("home.register_now")
       p class="lead"
         /a class="btn btn-primary btn-lg" href="#" role="button" Sign up
         = link_to t("sign_up"), new_user_registration_path, class: "btn btn-primary btn-lg", role: "button"

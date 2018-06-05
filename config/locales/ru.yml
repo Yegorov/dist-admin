@@ -29,6 +29,7 @@ ru:
   home:
     project_name: Distributed Admin
     project_desc: Административная панель для разграничения прав доступа к распределенной системе
+    register_now: Если вы еще не с нами, то зарегистрируйтесь сейчас
   profile:
     profile: Учетная запись
     name: Имя
